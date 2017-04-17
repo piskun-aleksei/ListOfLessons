@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration debug="true"
+                     xmlns:log4j='http://jakarta.apache.org/log4j/'>
+
+    <appender name="infoFile" class="org.apache.log4j.RollingFileAppender">
+
+        <param name="append" value="true"/>
+        <param name="maxFileSize" value="15KB"/>
+        <param name="maxBackupIndex" value="5"/>
+        <param name="file" value="logs/infoLogs.log"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{yyyy-MM-dd HH:mm:ss} %-3p %c{1}:%L - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMax" value="INFO"/>
+            <param name="LevelMin" value="INFO"/>
+        </filter>
+    </appender>
+
+    <appender name="warnsFile" class="org.apache.log4j.RollingFileAppender">
+        <param name="append" value="true"/>
+        <param name="maxFileSize" value="5KB"/>
+        <param name="maxBackupIndex" value="5"/>
+        <param name="file" value="logs/warnsLogs.log"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{yyyy-MM-dd HH:mm:ss} %-3p %c{1}:%L - %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMax" value="WARN"/>
+            <param name="LevelMin" value="WARN"/>
+        </filter>
+    </appender>
+
+    <appender name="errorsFile" class="org.apache.log4j.RollingFileAppender">
+        <param name="Threshold" value="ERROR"/>
+        <param name="append" value="true"/>
+        <param name="maxFileSize" value="5KB"/>
+        <param name="maxBackupIndex" value="5"/>
+        <param name="file" value="logs/errorsLogs.log"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{yyyy-MM-dd HH:mm:ss} %-3p %c{1}:%L - %m%n"/>
+        </layout>
+    </appender>
+
+
+    <root>
+        <appender-ref ref="infoFile"/>
+        <appender-ref ref="errorsFile"/>
+        <appender-ref ref="warnsFile"/>
+    </root>
+
+</log4j:configuration>
