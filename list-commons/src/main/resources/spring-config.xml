@@ -9,7 +9,7 @@
        xmlns:context="http://www.springframework.org/schema/context">
 
     <context:annotation-config />
-    <import resource="classpath:dbcontext.xml"/>
+    <import resource="dbcontext.xml"/>
 
     <!--<bean name="bean name" class="com.bsuir.pisku.dao.impl.CLASS"/>-->
 
