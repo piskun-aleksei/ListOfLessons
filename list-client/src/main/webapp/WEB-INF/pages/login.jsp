@@ -28,7 +28,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Login dropdown</a>
+            <a class="navbar-brand" href="#">Login dropdown, hello ${login}</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -60,13 +60,13 @@
                                     <form class="form" role="form" method="post" action="login" accept-charset="UTF-8"
                                           id="login-nav">
                                         <div class="form-group">
-                                            <label class="sr-only" for="exampleInputEmail2">Email address</label>
-                                            <input type="email" class="form-control" id="exampleInputEmail2"
-                                                   placeholder="Email address" required>
+                                            <label class="sr-only" for="exampleInputEmail2">Login</label>
+                                            <input type="text" class="form-control" id="login" name="login"
+                                                   placeholder="Login" required>
                                         </div>
                                         <div class="form-group">
                                             <label class="sr-only" for="exampleInputPassword2">Password</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword2"
+                                            <input type="password" class="form-control" id="password" name="password"
                                                    placeholder="Password" required>
                                             <div class="help-block text-right"><a href="">Forget the password ?</a>
                                             </div>
@@ -79,6 +79,7 @@
                                                 <input type="checkbox"> keep me logged-in
                                             </label>
                                         </div>
+                                        <input type="hidden" name="cmd" value="login">
                                     </form>
                                 </div>
                                 <div class="bottom text-center">

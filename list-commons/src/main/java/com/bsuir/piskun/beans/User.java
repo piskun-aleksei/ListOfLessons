@@ -1,17 +1,37 @@
 package com.bsuir.piskun.beans;
 
-public abstract class User {
+public class User {
 
-    protected String username;
-    protected String password;
-    protected int permissionsLevel;
+    private int userId;
+    private String login;
+    private String password;
+    private String name;
+    private String surname;
+    private int rank;
 
-    public String getUsername() {
-        return username;
+    public User() {
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public User(String login, String password, int rank) {
+        this.login = login;
+        this.password = password;
+        this.rank = rank;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getPassword() {
@@ -22,13 +42,30 @@ public abstract class User {
         this.password = password;
     }
 
-    public int getPermissonsLevel() {
-        return permissionsLevel;
+    public String getName() {
+        return name;
     }
 
-    public void setPermissonsLevel(int permissionsLevel) {
-        this.permissionsLevel = permissionsLevel;
+    public void setName(String name) {
+        this.name = name;
     }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -41,10 +78,10 @@ public abstract class User {
 
         User user = (User) o;
 
-        if (getPermissonsLevel() != user.getPermissonsLevel()) {
+        if (getRank() != user.getRank()) {
             return false;
         }
-        if (getUsername() != null ? !getUsername().equals(user.getUsername()) : user.getUsername() != null) {
+        if (getLogin() != null ? !getLogin().equals(user.getLogin()) : user.getLogin() != null) {
             return false;
         }
         return getPassword() != null ? getPassword().equals(user.getPassword()) : user.getPassword() == null;
@@ -52,18 +89,17 @@ public abstract class User {
 
     @Override
     public int hashCode() {
-        int result = getUsername() != null ? getUsername().hashCode() : 0;
+        int result = getLogin() != null ? getLogin().hashCode() : 0;
         result = 31 * result + (getPassword() != null ? getPassword().hashCode() : 0);
-        result = 31 * result + getPermissonsLevel();
+        result = 31 * result + getRank();
         return result;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", permissonsLevel=" + permissionsLevel +
+                "login='" + login + '\'' +
+                ", rank=" + rank +
                 '}';
     }
 }

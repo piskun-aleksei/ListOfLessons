@@ -1,6 +1,7 @@
 package com.bsuir.piskun.exceptions;
 
 public class DaoException extends Exception {
+
     public DaoException() {
         super();
     }

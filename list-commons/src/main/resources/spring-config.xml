@@ -11,6 +11,8 @@
     <context:annotation-config />
     <import resource="dbcontext.xml"/>
 
-    <!--<bean name="bean name" class="com.bsuir.pisku.dao.impl.CLASS"/>-->
+    <bean name="authorizationDao" class="com.bsuir.piskun.dao.impl.AuthorizationDaoImpl"/>
+
+    <bean name="authorizationService" class="com.bsuir.piskun.services.impl.AuthorizationServiceImpl"/>
 
 </beans>
