@@ -19,12 +19,12 @@ import java.util.List;
 public class AuthorizationDaoImpl implements AuthorizationDao {
 
     private static final String INSERT_INTO_USERS = "INSERT INTO user" +
-            " (login, password, name, surname, rank) VALUES" +
+            " (login, password, username, surname, rank) VALUES" +
             " (?,?,?,?,?)";
-    private static final String SELECT_BY_LOGIN_FROM_USERS = "SELECT (user_id, login, password, name, surname, rank) from user WHERE login = ?";
-    private static final String SELECT_BY_LOGIN_AND_PASS_FROM_USERS = "SELECT (user_id, login, password, name, surname, rank) from user WHERE login = ? AND password = ?";
-    private static final String SELECT_ALL_FROM_USERS = "SELECT (user_id, login, password, name, surname, rank) from user";
-    private static final String UPDATE_USERS_BY_LOGIN = "UPDATE user SET (login, password, name, surname, rank) VALUES" +
+    private static final String SELECT_BY_LOGIN_FROM_USERS = "SELECT id, login, password, username, surname, rank from user WHERE login = ?";
+    private static final String SELECT_BY_LOGIN_AND_PASS_FROM_USERS = "SELECT id, login, password, username, surname, rank from user WHERE login = ? AND password = ?";
+    private static final String SELECT_ALL_FROM_USERS = "SELECT id, login, password, username, surname, rank from user";
+    private static final String UPDATE_USERS_BY_LOGIN = "UPDATE user SET (login, password, username, surname, rank) VALUES" +
             " (?,?,?,?,?) WHERE login = ?";
 
     @Autowired
@@ -93,13 +93,13 @@ public class AuthorizationDaoImpl implements AuthorizationDao {
             connection = dataSource.getConnection();
             preparedStatement = connection.prepareStatement(SELECT_BY_LOGIN_AND_PASS_FROM_USERS);
             preparedStatement.setString(1, login);
-            preparedStatement.setString(2, password);
+            preparedStatement.setString(2, HashCreator.encryptWithMD5(password));
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 user = setUser(new User(), rs);
             }
-        } catch (SQLException e) {
-            throw new DaoException("SQL FAILED", e);
+        } catch (SQLException | HashCreationException e) {
+            throw new DaoException("SQl OR HASH CREATION FAILED", e);
         } finally {
             try {
                 if (preparedStatement != null && !preparedStatement.isClosed()) {
@@ -152,10 +152,11 @@ public class AuthorizationDaoImpl implements AuthorizationDao {
             preparedStatement.setString(3, data.getName());
             preparedStatement.setString(4, data.getSurname());
             preparedStatement.setInt(5, data.getRank());
+            preparedStatement.setString(6, data.getPassword());
             preparedStatement.executeUpdate();
         } catch (SQLException | HashCreationException e) {
             throw new DaoException("SQl OR HASH CREATION FAILED", e);
-        }  finally {
+        } finally {
             try {
                 if (preparedStatement != null && !preparedStatement.isClosed()) {
                     preparedStatement.close();

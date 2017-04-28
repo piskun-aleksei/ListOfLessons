@@ -30,7 +30,6 @@ public class LoginController {
         ModelAndView model = new ModelAndView();
         try {
             HttpSession session = request.getSession();
-            System.out.println("LOOOOOOOOOOOOOOOGIN: " + request.getParameter("login"));
             User user = authorizationService.select(request.getParameter("login"), request.getParameter("password"));
             session.setAttribute("login", user.getLogin());
             model.setViewName("login");
