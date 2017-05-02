@@ -18,13 +18,13 @@ import java.util.List;
 
 public class AuthorizationDaoImpl implements AuthorizationDao {
 
-    private static final String INSERT_INTO_USERS = "INSERT INTO user" +
+    private static final String INSERT_INTO_USERS = "INSERT INTO users" +
             " (login, password, username, surname, rank) VALUES" +
             " (?,?,?,?,?)";
-    private static final String SELECT_BY_LOGIN_FROM_USERS = "SELECT id, login, password, username, surname, rank from user WHERE login = ?";
-    private static final String SELECT_BY_LOGIN_AND_PASS_FROM_USERS = "SELECT id, login, password, username, surname, rank from user WHERE login = ? AND password = ?";
-    private static final String SELECT_ALL_FROM_USERS = "SELECT id, login, password, username, surname, rank from user";
-    private static final String UPDATE_USERS_BY_LOGIN = "UPDATE user SET (login, password, username, surname, rank) VALUES" +
+    private static final String SELECT_BY_LOGIN_FROM_USERS = "SELECT id, login, password, username, surname, rank from users WHERE login = ?";
+    private static final String SELECT_BY_LOGIN_AND_PASS_FROM_USERS = "SELECT id, login, password, username, surname, rank from users WHERE login = ? AND password = ?";
+    private static final String SELECT_ALL_FROM_USERS = "SELECT id, login, password, username, surname, rank from users";
+    private static final String UPDATE_USERS_BY_LOGIN = "UPDATE users SET (login, password, username, surname, rank) VALUES" +
             " (?,?,?,?,?) WHERE login = ?";
 
     @Autowired
@@ -178,7 +178,7 @@ public class AuthorizationDaoImpl implements AuthorizationDao {
     }
 
     private User setUser(User user, ResultSet resultSet) throws SQLException {
-        user.setUserId(resultSet.getInt(RowValues.USER_ID));
+        user.setUserId(resultSet.getInt(RowValues.ID));
         user.setLogin(resultSet.getString(RowValues.LOGIN));
         user.setPassword(resultSet.getString(RowValues.PASSWORD));
         user.setName(resultSet.getString(RowValues.NAME));

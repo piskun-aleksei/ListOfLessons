@@ -38,4 +38,13 @@ public class LoginController {
         }
         return model;
     }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public ModelAndView logout(HttpServletRequest request) {
+        ModelAndView model = new ModelAndView();
+        HttpSession session = request.getSession();
+        session.setAttribute("login", null);
+        model.setViewName("login");
+        return model;
+    }
 }

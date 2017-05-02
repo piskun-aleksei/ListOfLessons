@@ -11,5 +11,11 @@ public class RowValues {
 
     public static final String RANK = "rank";
 
-    public static final String USER_ID = "id";
+    public static final String ID = "id";
+
+    public static final String LESSON_NAME = "lesson_name";
+
+    public static final String LESSON_TYPE = "lesson_type";
+
+    public static final String GROUP_NAME = "group_name";
 }

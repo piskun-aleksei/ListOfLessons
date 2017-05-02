@@ -19,26 +19,18 @@
 <body>
 
 <nav class="navbar navbar-default navbar-inverse" role="navigation">
-    <div class="container-fluid">
+    <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">
+            <span class="navbar-brand" href="#">
                 <c:if test="${login != null}">
                     Login is: ${login}
                 </c:if>
                 <c:if test="${login == null}">
                     You are not logged in
                 </c:if>
-            </a>
+            </span>
         </div>
-
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
@@ -57,8 +49,8 @@
                     </ul>
                 </li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <c:if test="${login != null}">
+            <ul class="nav navbar-nav navbar-right header-navbar">
+                <c:if test="${login == null}">
                     <li><p class="navbar-text">Already have an account?</p></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span
@@ -102,7 +94,7 @@
                         </ul>
                     </li>
                 </c:if>
-                <c:if test="${login == null}">
+                <c:if test="${login != null}">
                     <li>
                         <form class="form" role="form" method="get" action="logout"
                               accept-charset="UTF-8"

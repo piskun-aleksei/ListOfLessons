@@ -2,40 +2,40 @@ package com.bsuir.piskun.constants;
 
 public enum LessonType {
 
-    LECTURE(1), PRACTICAL(2), LABORATORY_WORK(3), TEST(4), EXAM(5);
+    LECTURE("Lecture"), PRACTICAL("Practical"), LABORATORY_WORK("Laboratory"), TEST("Test"), EXAM("Exam");
 
-    private int value;
+    private String value;
 
-    LessonType(int value) {
+    LessonType(String value) {
         this.value = value;
     }
 
-    public int getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(String value) {
         this.value = value;
     }
 
-    public static LessonType getLessonTypeById(int id) {
+    public static LessonType getLessonTypeByValue(String value) {
 
         LessonType lessonType = null;
 
-        switch (id) {
-            case 1:
+        switch (value) {
+            case "Lecture":
                 lessonType = LECTURE;
                 break;
-            case 2:
+            case "Practical":
                 lessonType = PRACTICAL;
                 break;
-            case 3:
+            case "Laboratory":
                 lessonType = LABORATORY_WORK;
                 break;
-            case 4:
+            case "Test":
                 lessonType = TEST;
                 break;
-            case 5:
+            case "Exam":
                 lessonType = EXAM;
                 break;
             default:
@@ -46,30 +46,6 @@ public enum LessonType {
 
     @Override
     public String toString() {
-        switch (value) {
-            case 1:
-                return "LessonType{" +
-                        "value= LECTURE" +
-                        '}';
-            case 2:
-                return "LessonType{" +
-                        "value= PRACTICAL" +
-                        '}';
-            case 3:
-                return "LessonType{" +
-                        "value= LABORATORY WORK" +
-                        '}';
-            case 4:
-                return "LessonType{" +
-                        "value= TEST" +
-                        '}';
-            case 5:
-                return "LessonType{" +
-                        "value= EXAM" +
-                        '}';
-            default:
-                break;
-        }
-        return Integer.toString(value);
+        return value;
     }
 }

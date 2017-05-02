@@ -100,4 +100,15 @@ body {
     }
 }
 
+.btn {
+    line-height: 16px !important;
+}
+
+.header-navbar .btn {
+    margin-top: 11px;
+}
+
+form {
+    margin: 0;
+}
 
