@@ -12,7 +12,7 @@ public interface ScheduleDao extends BasicDao<GroupSchedule> {
 
     GroupSchedule select(String groupNumber) throws DaoException;
 
-    void addLesson(Group group, Teacher teacher, Lesson lesson, LessonType lessonType, Room room);
+    void addLesson(String dateTime, Group group, Teacher teacher, Lesson lesson, Room room) throws DaoException;
 
     void removeLesson(Group group, String dateTime) throws DaoException;
 

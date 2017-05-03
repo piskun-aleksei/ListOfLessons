@@ -17,9 +17,19 @@ public class RowValues {
 
     public static final String LESSON_TYPE = "lesson_type";
 
-    public static final String GROUP_NAME = "group_name";
+    public static final String GROUP_NUMBER = "group_number";
 
     public static final String STUDENT_CARD_NUMBER = "student_card_number";
 
     public static final String ROOM_NUMBER = "room_number";
+
+    public static final String DATE_TIME = "date_time";
+
+    public static final String TEACHER_ID = "teacher_id";
+
+    public static final String ROOM_ID = "room_id";
+
+    public static final String LESSON_ID = "lesson_id";
+
+    public static final String POSITION = "position";
 }

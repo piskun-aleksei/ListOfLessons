@@ -14,9 +14,13 @@
     <bean name="authorizationDao" class="com.bsuir.piskun.dao.impl.AuthorizationDaoImpl"/>
     <bean name="groupDao" class="com.bsuir.piskun.dao.impl.GroupDaoImpl"/>
     <bean name="lessonDao" class="com.bsuir.piskun.dao.impl.LessonDaoImpl"/>
+    <bean name="roomDao" class="com.bsuir.piskun.dao.impl.RoomDaoImpl"/>
+    <bean name="scheduleDao" class="com.bsuir.piskun.dao.impl.ScheduleDaoImpl"/>
 
     <bean name="authorizationService" class="com.bsuir.piskun.services.impl.AuthorizationServiceImpl"/>
     <bean name="groupService" class="com.bsuir.piskun.services.impl.GroupServiceImpl"/>
     <bean name="lessonService" class="com.bsuir.piskun.services.impl.LessonServiceImpl"/>
+    <bean name="roomService" class="com.bsuir.piskun.services.impl.RoomServiceImpl"/>
+    <bean name="scheduleService" class="com.bsuir.piskun.services.impl.ScheduleServiceImpl"/>
 
 </beans>

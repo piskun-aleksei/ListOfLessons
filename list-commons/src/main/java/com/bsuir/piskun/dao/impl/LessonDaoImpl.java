@@ -20,7 +20,6 @@ public class LessonDaoImpl implements LessonDao {
     private static final String INSERT_INTO_LESSON = "INSERT INTO lesson" +
             " (lesson_name, lesson_type) VALUES" +
             " (?,?)";
-    private static final String SELECT_BY_ID_FROM_LESSON = "SELECT id, lesson_name, lesson_type FROM lesson WHERE id = ?";
     private static final String SELECT_ALL_FROM_LESSON = "SELECT id, lesson_name, lesson_type FROM lesson";
     private static final String UPDATE_LESSON_BY_ID = "UPDATE lesson SET (lesson_name, lesson_type) VALUES" +
             " (?,?) WHERE id = ?";

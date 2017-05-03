@@ -2,63 +2,59 @@ package com.bsuir.piskun.beans;
 
 import com.bsuir.piskun.constants.LessonType;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.sql.Date;
+import java.util.List;
 
 public class GroupSchedule {
 
     private Group group;
-    private String roomNumber;
-    private Teacher teacher;
-    private Lesson lesson;
-    private Date date;
-    private LessonType lessonType;
+    private List<String> roomNumbers;
+    private List<Teacher> teachers;
+    private List<Lesson> lessons;
+    private List<Date> dates;
+
+    public GroupSchedule() {
+        roomNumbers = new ArrayList<>();
+        teachers = new ArrayList<>();
+        lessons = new ArrayList<>();
+        dates = new ArrayList<>();
+    }
 
     public Group getGroup() {
         return group;
     }
 
-    public void setGroupNumber(Group group) {
+    public List<String> getRoomNumbers() {
+        return roomNumbers;
+    }
+
+    public List<Teacher> getTeachers() {
+        return teachers;
+    }
+
+    public List<Lesson> getLessons() {
+        return lessons;
+    }
+
+    public List<Date> getDates() {
+        return dates;
+    }
+
+    public void setGroup(Group group) {
         this.group = group;
     }
 
-    public String getRoomNumber() {
-        return roomNumber;
-    }
-
-    public void setRoomNumber(String roomNumber) {
-        this.roomNumber = roomNumber;
-    }
-
-    public Teacher getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
-    }
-
-    public Lesson getLesson() {
-        return lesson;
-    }
-
-    public void setLesson(Lesson lesson) {
-        this.lesson = lesson;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public LessonType getLessonType() {
-        return lessonType;
-    }
-
-    public void setLessonType(LessonType lessonType) {
-        this.lessonType = lessonType;
+    public void addLesson(String roomNumber, Teacher teacher, Lesson lesson, Date date) {
+        if (roomNumber == null || roomNumber.isEmpty() || teacher == null || lesson == null ||
+                date == null) {
+            //TODO log
+            return;
+        }
+        roomNumbers.add(roomNumber);
+        teachers.add(teacher);
+        lessons.add(lesson);
+        dates.add(date);
     }
 
     @Override
@@ -69,20 +65,20 @@ public class GroupSchedule {
         GroupSchedule that = (GroupSchedule) o;
 
         if (group != null ? !group.equals(that.group) : that.group != null) return false;
-        if (roomNumber != null ? !roomNumber.equals(that.roomNumber) : that.roomNumber != null) return false;
-        if (teacher != null ? !teacher.equals(that.teacher) : that.teacher != null) return false;
-        if (lesson != null ? !lesson.equals(that.lesson) : that.lesson != null) return false;
-        if (date != null ? !date.equals(that.date) : that.date != null) return false;
-        return lessonType == that.lessonType;
+        if (roomNumbers != null ? !roomNumbers.equals(that.roomNumbers) : that.roomNumbers != null) return false;
+        if (teachers != null ? !teachers.equals(that.teachers) : that.teachers != null) return false;
+        if (lessons != null ? !lessons.equals(that.lessons) : that.lessons != null) return false;
+        return dates != null ? dates.equals(that.dates) : that.dates == null;
 
     }
 
     @Override
     public int hashCode() {
         int result = group != null ? group.hashCode() : 0;
-        result = 31 * result + (roomNumber != null ? roomNumber.hashCode() : 0);
-        result = 31 * result + (teacher != null ? teacher.hashCode() : 0);
-        result = 31 * result + (lesson != null ? lesson.hashCode() : 0);
+        result = 31 * result + (roomNumbers != null ? roomNumbers.hashCode() : 0);
+        result = 31 * result + (teachers != null ? teachers.hashCode() : 0);
+        result = 31 * result + (lessons != null ? lessons.hashCode() : 0);
+        result = 31 * result + (dates != null ? dates.hashCode() : 0);
         return result;
     }
 
@@ -90,11 +86,10 @@ public class GroupSchedule {
     public String toString() {
         return "GroupSchedule{" +
                 "group=" + group +
-                ", roomNumber='" + roomNumber + '\'' +
-                ", teacher='" + teacher + '\'' +
-                ", lesson=" + lesson +
-                ", date=" + date +
-                ", lessonType=" + lessonType +
+                ", roomNumbers=" + roomNumbers +
+                ", teachers=" + teachers +
+                ", lessons=" + lessons +
+                ", dates=" + dates +
                 '}';
     }
 }

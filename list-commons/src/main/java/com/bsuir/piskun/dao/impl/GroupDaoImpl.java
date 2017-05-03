@@ -6,7 +6,6 @@ import com.bsuir.piskun.constants.RowValues;
 import com.bsuir.piskun.dao.GroupDao;
 import com.bsuir.piskun.exceptions.DaoException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -123,7 +122,7 @@ public class GroupDaoImpl implements GroupDao {
             preparedStatement = connection.prepareStatement(SELECT_ALL_GROUP_NUMBERS);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                groups.add(rs.getString(RowValues.GROUP_NAME));
+                groups.add(rs.getString(RowValues.GROUP_NUMBER));
             }
         } catch (SQLException e) {
             throw new DaoException("SQL FAILED", e);
