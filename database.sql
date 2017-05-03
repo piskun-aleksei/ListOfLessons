@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: list_schema
+-- Host: localhost    Database: list_schema
 -- ------------------------------------------------------
--- Server version	5.7.17-log
+-- Server version	5.7.18-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -142,7 +142,7 @@ CREATE TABLE `student` (
   UNIQUE KEY `student_card_number_UNIQUE` (`student_card_number`),
   UNIQUE KEY `user_id_UNIQUE` (`user_id`),
   CONSTRAINT `fk_student_user_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,7 +151,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (1,'0132505',NULL,'Алексей','Пискун'),(2,'0132506',NULL,'Александр','Молотовник'),(3,'0132507',NULL,'Станистав','Маковский'),(4,'0132508',NULL,'Евгений','Шилов');
+INSERT INTO `student` VALUES (1,'0132505',NULL,'Алексей','Пискун'),(2,'0132506',NULL,'Александр','Молотовник'),(3,'0132507',NULL,'Станистав','Маковский'),(4,'0132508',NULL,'Евгений','Шилов'),(5,'0132509',NULL,'Артем','Борбровник');
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -221,4 +221,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-02 23:28:46
+-- Dump completed on 2017-05-03 17:54:40
