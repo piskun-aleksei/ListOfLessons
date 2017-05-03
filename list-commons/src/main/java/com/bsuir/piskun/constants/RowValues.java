@@ -5,7 +5,7 @@ public class RowValues {
 
     public static final String PASSWORD = "password";
 
-    public static final String NAME = "username";
+    public static final String USERNAME = "username";
 
     public static final String SURNAME = "surname";
 
@@ -18,4 +18,6 @@ public class RowValues {
     public static final String LESSON_TYPE = "lesson_type";
 
     public static final String GROUP_NAME = "group_name";
+
+    public static final String STUDENT_CARD_NUMBER = "student_card_number";
 }

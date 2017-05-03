@@ -181,7 +181,7 @@ public class AuthorizationDaoImpl implements AuthorizationDao {
         user.setUserId(resultSet.getInt(RowValues.ID));
         user.setLogin(resultSet.getString(RowValues.LOGIN));
         user.setPassword(resultSet.getString(RowValues.PASSWORD));
-        user.setName(resultSet.getString(RowValues.NAME));
+        user.setName(resultSet.getString(RowValues.USERNAME));
         user.setSurname(resultSet.getString(RowValues.SURNAME));
         user.setRank(resultSet.getInt(RowValues.RANK));
         return user;

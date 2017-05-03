@@ -18,11 +18,12 @@ import java.util.List;
 
 public class GroupDaoImpl implements GroupDao {
 
-    private static final String INSERT_INTO_GROUP = "INSERT INTO groups" +
-            " (group_number, student_id) VALUES" +
-            " (?)";
-    private static final String SELECT_BY_GROUP_NUMBER_FROM_GROUP = "SELECT student_id FROM groups WHERE group_number = ?";
+    private static final String SELECT_BY_GROUP_NUMBER_FROM_GROUP =
+            "SELECT student.id, student.username, student.surname, student.student_card_number FROM groups"
+                    + " INNER JOIN student ON groups.student_id = student.id WHERE groups.group_number = ?";
     private static final String SELECT_ALL_GROUP_NUMBERS = "SELECT id, lesson_name, lesson_type FROM lesson";
+    private static final String ADD_STUDENT_TO_GROUP = "INSERT INTO groups (group_number, student_id) VALUES (?,?)";
+    private static final String REMOVE_STUDENT_FROM_GROUP = "DELETE FROM groups WHERE group_number = ? AND student_id = ?";
 
     @Autowired
     private DataSource dataSource;
@@ -42,13 +43,9 @@ public class GroupDaoImpl implements GroupDao {
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
-
-
-            /////TODO IMPLEMENT ALL METHODS - THis one is Transactional to get usernames;
-
             group = new Group();
             group.setGroupNumber(groupNumber);
-            preparedStatement = connection.prepareStatement(SELECT_ALL_GROUP_NUMBERS);
+            preparedStatement = connection.prepareStatement(SELECT_BY_GROUP_NUMBER_FROM_GROUP);
             preparedStatement.setString(1, groupNumber);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
@@ -70,12 +67,52 @@ public class GroupDaoImpl implements GroupDao {
 
     @Override
     public void removeStudent(Group group, Student student) throws DaoException {
-
+        PreparedStatement preparedStatement = null;
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            group = new Group();
+            preparedStatement = connection.prepareStatement(REMOVE_STUDENT_FROM_GROUP);
+            preparedStatement.setString(1, group.getGroupNumber());
+            preparedStatement.setInt(2, student.getStudentId());
+            ResultSet rs = preparedStatement.executeQuery();
+            group.removeStudent(student);
+        } catch (SQLException e) {
+            throw new DaoException("SQL FAILED", e);
+        } finally {
+            try {
+                if (preparedStatement != null && !preparedStatement.isClosed()) {
+                    preparedStatement.close();
+                }
+            } catch (SQLException e) {
+                //TODO.. Log this
+            }
+        }
     }
 
     @Override
     public void addStudent(Group group, Student student) throws DaoException {
-
+        PreparedStatement preparedStatement = null;
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            group = new Group();
+            preparedStatement = connection.prepareStatement(ADD_STUDENT_TO_GROUP);
+            preparedStatement.setString(1, group.getGroupNumber());
+            preparedStatement.setInt(2, student.getStudentId());
+            ResultSet rs = preparedStatement.executeQuery();
+            group.addStudent(student);
+        } catch (SQLException e) {
+            throw new DaoException("SQL FAILED", e);
+        } finally {
+            try {
+                if (preparedStatement != null && !preparedStatement.isClosed()) {
+                    preparedStatement.close();
+                }
+            } catch (SQLException e) {
+                //TODO.. Log this
+            }
+        }
     }
 
     public List<String> select() throws DaoException {
@@ -122,9 +159,12 @@ public class GroupDaoImpl implements GroupDao {
     }
 
     private Group addUserToGroup(Group group, ResultSet resultSet) throws SQLException {
-        ///group.addStudent(resultSet.getString(RowValues.GROUP_NAME));
-
-        //TODO IMPLEMENT RIGHT
+        Student student = new Student();
+        student.setUserId(resultSet.getInt(RowValues.ID));
+        student.setStudentCardNumber(resultSet.getString(RowValues.STUDENT_CARD_NUMBER));
+        student.setStudentName(resultSet.getString(RowValues.USERNAME));
+        student.setStudentSurname(resultSet.getString(RowValues.SURNAME));
+        group.addStudent(student);
         return group;
     }
 }
