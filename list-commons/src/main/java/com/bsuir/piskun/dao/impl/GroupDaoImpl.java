@@ -35,8 +35,7 @@ public class GroupDaoImpl implements GroupDao {
     public List<Group> select(Group data) throws DaoException {
         throw new UnsupportedOperationException();
     }
-
-    @Transactional
+    
     public Group select(String groupNumber) throws DaoException {
         PreparedStatement preparedStatement = null;
         Group group = null;
@@ -75,7 +74,7 @@ public class GroupDaoImpl implements GroupDao {
             preparedStatement = connection.prepareStatement(REMOVE_STUDENT_FROM_GROUP);
             preparedStatement.setString(1, group.getGroupNumber());
             preparedStatement.setInt(2, student.getStudentId());
-            ResultSet rs = preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
             group.removeStudent(student);
         } catch (SQLException e) {
             throw new DaoException("SQL FAILED", e);
@@ -100,7 +99,7 @@ public class GroupDaoImpl implements GroupDao {
             preparedStatement = connection.prepareStatement(ADD_STUDENT_TO_GROUP);
             preparedStatement.setString(1, group.getGroupNumber());
             preparedStatement.setInt(2, student.getStudentId());
-            ResultSet rs = preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
             group.addStudent(student);
         } catch (SQLException e) {
             throw new DaoException("SQL FAILED", e);

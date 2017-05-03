@@ -20,4 +20,6 @@ public class RowValues {
     public static final String GROUP_NAME = "group_name";
 
     public static final String STUDENT_CARD_NUMBER = "student_card_number";
+
+    public static final String ROOM_NUMBER = "room_number";
 }
