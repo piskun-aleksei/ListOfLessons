@@ -19,20 +19,22 @@ public class LoginController {
     private AuthorizationService authorizationService;
 
     @RequestMapping(value = {"/", "/public**"}, method = RequestMethod.GET)
-    public ModelAndView requestPublic() {
+    public ModelAndView requestPublic(HttpServletRequest request) {
         ModelAndView model = new ModelAndView();
+        HttpSession session = request.getSession();
+        session.setAttribute("currentPage", "login");
         model.setViewName("login");
         return model;
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView login(HttpServletRequest request) {
         ModelAndView model = new ModelAndView();
         try {
             HttpSession session = request.getSession();
             User user = authorizationService.select(request.getParameter("login"), request.getParameter("password"));
             session.setAttribute("login", user.getLogin());
-            model.setViewName("login");
+            model.setViewName((String) session.getAttribute("currentPage"));
         } catch (ServiceException e) {
             //TODO.. Something
         }
@@ -44,6 +46,15 @@ public class LoginController {
         ModelAndView model = new ModelAndView();
         HttpSession session = request.getSession();
         session.setAttribute("login", null);
+        model.setViewName((String) session.getAttribute("currentPage"));
+        return model;
+    }
+
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    public ModelAndView home(HttpServletRequest request) {
+        ModelAndView model = new ModelAndView();
+        HttpSession session = request.getSession();
+        session.setAttribute("currentPage", "login");
         model.setViewName("login");
         return model;
     }
