@@ -121,3 +121,8 @@ body {
 form {
     margin: 0;
 }
+
+.mark-button {
+    display: inline;
+    float: right;
+}
