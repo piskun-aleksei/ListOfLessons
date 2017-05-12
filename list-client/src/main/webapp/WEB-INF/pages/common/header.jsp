@@ -26,11 +26,11 @@
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <span class="navbar-brand" href="#">
-                <c:if test="${login != null}">
-                    Login is: ${login}
+            <span class="navbar-brand">
+                <c:if test="${currentLogin != null}">
+                    Login is: ${currentLogin}
                 </c:if>
-                <c:if test="${login == null}">
+                <c:if test="${currentLogin == null}">
                     You are not logged in
                 </c:if>
             </span>
@@ -38,10 +38,8 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Link</a></li>
-                <li><a href="#">Link</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Navigation<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li>
                             <form class="form" role="form" method="get" action="schedule">
@@ -49,10 +47,6 @@
                                 <input type="hidden" name="cmd" value="schedule"/>
                             </form>
                         </li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
                         <li class="divider"></li>
                         <li>
                             <form class="form" role="form" method="get" action="home">
@@ -64,7 +58,7 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right header-navbar">
-                <c:if test="${login == null}">
+                <c:if test="${currentLogin == null}">
                     <li><p class="navbar-text">Already have an account?</p></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span
@@ -108,7 +102,7 @@
                         </ul>
                     </li>
                 </c:if>
-                <c:if test="${login != null}">
+                <c:if test="${currentLogin != null}">
                     <li>
                         <form class="form" role="form" method="get" action="logout"
                               accept-charset="UTF-8"

@@ -12,7 +12,7 @@
 
 <body>
 
-<jsp:include page="./common/header.jsp" />
+<jsp:include page="./common/header.jsp"/>
 
 <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
@@ -29,40 +29,121 @@
         <td>Пискун Алексей</td>
         <td>
             <span class="mark-span">8</span>
-            <button class="btn btn-primary btn-xs mark-button" data-title="Edit" data-toggle="modal" data-target="#edit">
-                <span class="glyphicon glyphicon-pencil"></span>
-            </button>
+            <c:if test="${currentRank == 3}">
+                <button class="btn btn-primary btn-xs mark-button" data-title="Edit" data-toggle="modal"
+                        data-target="#edit">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+            </c:if>
         </td>
         <td>
             <span class="mark-span"></span>
-            <button class="btn btn-primary btn-xs mark-button" data-title="Edit" data-toggle="modal" data-target="#edit">
-                <span class="glyphicon glyphicon-pencil"></span>
-            </button>
+            <c:if test="${currentRank == 3}">
+                <button class="btn btn-primary btn-xs mark-button" data-title="Edit" data-toggle="modal"
+                        data-target="#edit">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+            </c:if>
         </td>
         <td>
             <span class="mark-span">9</span>
-            <button class="btn btn-primary btn-xs mark-button" data-title="Edit" data-toggle="modal" data-target="#edit">
+            <c:if test="${currentRank == 3}">
+                <button class="btn btn-primary btn-xs mark-button" data-title="Edit" data-toggle="modal"
+                        data-target="#edit">
                     <span class="glyphicon glyphicon-pencil"></span>
-            </button>
+                </button>
+            </c:if>
         </td>
     </tr>
     <tr>
         <td>Евгений Шилов</td>
-        <td>7</td>
-        <td>7</td>
-        <td>9</td>
+        <td>
+            <span class="mark-span"></span>
+            <c:if test="${currentRank == 3}">
+                <button class="btn btn-primary btn-xs mark-button" data-title="Edit" data-toggle="modal"
+                        data-target="#edit">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+            </c:if>
+        </td>
+        <td>
+            <span class="mark-span"></span>
+            <c:if test="${currentRank == 3}">
+                <button class="btn btn-primary btn-xs mark-button" data-title="Edit" data-toggle="modal"
+                        data-target="#edit">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+            </c:if>
+        </td>
+        <td>
+            <span class="mark-span">9</span>
+            <c:if test="${currentRank == 3}">
+                <button class="btn btn-primary btn-xs mark-button" data-title="Edit" data-toggle="modal"
+                        data-target="#edit">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+            </c:if>
+        </td>
     </tr>
     <tr>
         <td>Станислав Маковский</td>
-        <td>2</td>
-        <td>3</td>
-        <td>10</td>
+        <td>
+            <span class="mark-span">5</span>
+            <c:if test="${currentRank == 3}">
+                <button class="btn btn-primary btn-xs mark-button" data-title="Edit" data-toggle="modal"
+                        data-target="#edit">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+            </c:if>
+        </td>
+        <td>
+            <span class="mark-span">2</span>
+            <c:if test="${currentRank == 3}">
+                <button class="btn btn-primary btn-xs mark-button" data-title="Edit" data-toggle="modal"
+                        data-target="#edit">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+            </c:if>
+        </td>
+        <td>
+            <span class="mark-span">7</span>
+            <c:if test="${currentRank == 3}">
+                <button class="btn btn-primary btn-xs mark-button" data-title="Edit" data-toggle="modal"
+                        data-target="#edit">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+            </c:if>
+        </td>
     </tr>
     <tr>
         <td>Марук Евгений</td>
-        <td></td>
-        <td></td>
-        <td>8</td>
+        <td>
+            <span class="mark-span">6</span>
+            <c:if test="${currentRank == 3}">
+                <button class="btn btn-primary btn-xs mark-button" data-title="Edit" data-toggle="modal"
+                        data-target="#edit">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+            </c:if>
+        </td>
+        <td>
+            <span class="mark-span"></span>
+            <c:if test="${currentRank == 3}">
+                <button class="btn btn-primary btn-xs mark-button" data-title="Edit" data-toggle="modal"
+                        data-target="#edit">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+            </c:if>
+        </td>
+        <td>
+            <span class="mark-span">10</span>
+            <c:if test="${currentRank == 3}">
+                <button class="btn btn-primary btn-xs mark-button" data-title="Edit" data-toggle="modal"
+                        data-target="#edit">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+            </c:if>
+        </td>
     </tr>
     </tbody>
 </table>

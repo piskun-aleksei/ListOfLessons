@@ -23,6 +23,7 @@ public class LoginController {
         ModelAndView model = new ModelAndView();
         HttpSession session = request.getSession();
         session.setAttribute("currentPage", "login");
+        session.setAttribute("currentRank", 0);
         model.setViewName("login");
         return model;
     }
@@ -33,7 +34,10 @@ public class LoginController {
         try {
             HttpSession session = request.getSession();
             User user = authorizationService.select(request.getParameter("login"), request.getParameter("password"));
-            session.setAttribute("login", user.getLogin());
+            if (user != null) {
+                session.setAttribute("currentLogin", user.getLogin());
+                session.setAttribute("currentRank", user.getRank());
+            }
             model.setViewName((String) session.getAttribute("currentPage"));
         } catch (ServiceException e) {
             //TODO.. Something
@@ -45,7 +49,8 @@ public class LoginController {
     public ModelAndView logout(HttpServletRequest request) {
         ModelAndView model = new ModelAndView();
         HttpSession session = request.getSession();
-        session.setAttribute("login", null);
+        session.setAttribute("currentLogin", null);
+        session.setAttribute("currentRank", 0);
         model.setViewName((String) session.getAttribute("currentPage"));
         return model;
     }
