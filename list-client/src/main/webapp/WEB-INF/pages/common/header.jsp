@@ -12,14 +12,20 @@
     <spring:url value="/resources/css/tables.css" var="tablescss"/>
     <link href="${tablescss}" rel="stylesheet"/>
 
-    <spring:url value="/resources/js/tables.js" var="tablesjs"/>
-    <script src="${tablesjs}"></script>
-
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <spring:url value="/resources/js/tables.js" var="tablesjs"/>
+    <script src="${tablesjs}"></script>
+
+    <spring:url value="/resources/js/header.js" var="headerjs"/>
+    <script src="${headerjs}"></script>
+
+
 </head>
 <body>
 <nav class="navbar navbar-default navbar-inverse" role="navigation">
@@ -42,8 +48,9 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Navigation<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li>
-                            <form class="form" role="form" method="get" action="schedule">
-                                <a href="javascript:;" onclick="parentNode.submit();">Show schedule</a>
+                            <form class="form" role="form" method="get" action="schedule" id="scheduleForm">
+                                <input type="text" id="userGroup" name="userGroup"/>
+                                <button type="button" id="scheduleButton" class="btn btn-success">Show schedule</button>
                                 <input type="hidden" name="cmd" value="schedule"/>
                             </form>
                         </li>
@@ -70,12 +77,12 @@
                                         <form class="form" role="form" method="post" action="login"
                                               accept-charset="UTF-8"
                                               id="login-nav">
-                                            <div class="form-group">
+                                            <div class="form-groupNumber">
                                                 <label class="sr-only">Login</label>
                                                 <input type="text" class="form-control" id="login" name="login"
                                                        placeholder="Login" required>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-groupNumber">
                                                 <label class="sr-only">Password</label>
                                                 <input type="password" class="form-control" id="password"
                                                        name="password"
@@ -83,7 +90,7 @@
                                                 <div class="help-block text-right"><a href="">Forget the password ?</a>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-groupNumber">
                                                 <button type="submit" class="btn btn-primary btn-block">Sign in</button>
                                             </div>
                                             <div class="checkbox">

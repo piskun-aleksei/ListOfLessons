@@ -1,6 +1,6 @@
 $(document).ready(function() {
-    $('#datatable').dataTable();
+    //$('#datatable').dataTable();
 
-    $("[data-toggle=tooltip]").tooltip();
+    //$("[data-toggle=tooltip]").tooltip();
 
 } );

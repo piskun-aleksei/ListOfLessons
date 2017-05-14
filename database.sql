@@ -68,6 +68,35 @@ INSERT INTO `lesson` VALUES (1,'КПП','Laboratory');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `marks`
+--
+
+DROP TABLE IF EXISTS `marks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `marks` (
+  `schedule_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `mark` int(11) NOT NULL,
+  `absent` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`schedule_id`,`student_id`),
+  KEY `fk_marks_student_student_id_idx` (`student_id`),
+  CONSTRAINT `fk_marks_schedule_schedule_id` FOREIGN KEY (`schedule_id`) REFERENCES `schedule` (`schedule_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_marks_student_student_id` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `marks`
+--
+
+LOCK TABLES `marks` WRITE;
+/*!40000 ALTER TABLE `marks` DISABLE KEYS */;
+INSERT INTO `marks` VALUES (1,1,4,NULL),(1,2,5,1),(1,4,10,NULL),(2,1,3,NULL),(2,4,7,NULL);
+/*!40000 ALTER TABLE `marks` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `room`
 --
 
@@ -80,7 +109,7 @@ CREATE TABLE `room` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `room_number_UNIQUE` (`room_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,7 +118,7 @@ CREATE TABLE `room` (
 
 LOCK TABLES `room` WRITE;
 /*!40000 ALTER TABLE `room` DISABLE KEYS */;
-INSERT INTO `room` VALUES (1,'514');
+INSERT INTO `room` VALUES (2,'501'),(1,'514');
 /*!40000 ALTER TABLE `room` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -101,12 +130,14 @@ DROP TABLE IF EXISTS `schedule`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `schedule` (
+  `schedule_id` int(11) NOT NULL,
   `date_time` datetime NOT NULL,
   `group_number` varchar(45) NOT NULL,
   `teacher_id` int(11) DEFAULT NULL,
   `room_id` int(11) DEFAULT NULL,
   `lesson_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`group_number`),
+  PRIMARY KEY (`group_number`,`schedule_id`),
+  UNIQUE KEY `shedule_id_UNIQUE` (`schedule_id`),
   KEY `fk_schedule_teacher_teacher_id_idx` (`teacher_id`),
   KEY `fk_schedule_room_room_id_idx` (`room_id`),
   KEY `fk_schedule_lesson_lesson_id_idx` (`lesson_id`),
@@ -123,7 +154,7 @@ CREATE TABLE `schedule` (
 
 LOCK TABLES `schedule` WRITE;
 /*!40000 ALTER TABLE `schedule` DISABLE KEYS */;
-INSERT INTO `schedule` VALUES ('2017-05-03 11:45:00','350504',1,1,1);
+INSERT INTO `schedule` VALUES (1,'2017-05-03 11:45:00','350504',1,1,1),(2,'2017-06-03 11:45:00','350504',1,2,1);
 /*!40000 ALTER TABLE `schedule` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -225,4 +256,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-12 22:20:44
+-- Dump completed on 2017-05-14 13:32:01

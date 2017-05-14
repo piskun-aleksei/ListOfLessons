@@ -1,10 +1,6 @@
 package com.bsuir.piskun.dao.impl;
 
-import com.bsuir.piskun.beans.Group;
-import com.bsuir.piskun.beans.GroupSchedule;
-import com.bsuir.piskun.beans.Lesson;
-import com.bsuir.piskun.beans.Room;
-import com.bsuir.piskun.beans.Teacher;
+import com.bsuir.piskun.beans.*;
 import com.bsuir.piskun.constants.LessonType;
 import com.bsuir.piskun.constants.RowValues;
 import com.bsuir.piskun.dao.ScheduleDao;
@@ -15,19 +11,32 @@ import javax.sql.DataSource;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ScheduleDaoImpl implements ScheduleDao {
 
     private static final String SELECT_BY_GROUP_NUMBER_FROM_GROUP =
-            "SELECT date_time, group_number, teacher.id as teacher_id, teacher.position, teacher.username, teacher.surname," +
+            "SELECT schedule_id, date_time, group_number, teacher.id as teacher_id, teacher.position, teacher.username, teacher.surname," +
                     "room.room_number, lesson.id as lesson_id, lesson.lesson_name," +
-                    "lesson.lesson_type FROM schedule" +
-                    "INNER JOIN teacher ON teacher.id = schedule.teacher_id" +
+                    "lesson.lesson_type FROM schedule " +
+                    "INNER JOIN teacher ON teacher.id = schedule.teacher_id " +
                     "INNER JOIN room ON room.id = schedule.room_id INNER JOIN lesson ON " +
                     "lesson.id = schedule.lesson_id WHERE group_number = ?";
-    private static final String ADD_LESSON_TO_SCHEDULE = "INSERT INTO schedule (date_time, group_number, teacher_id, room_id, lesson_id) VALUES (?,?,?,?,?)";
-    private static final String REMOVE_LESSON_FROM_SCHEDULE = "DELETE FROM schedule WHERE group_number = ? AND date_time = ?";
+    private static final String SELECT_BY_GROUP_NUMBER_AND_LESSON_ID_FROM_GROUP =
+            "SELECT schedule_id, date_time, group_number, teacher.id as teacher_id, teacher.position, teacher.username, teacher.surname," +
+                    "room.room_number, lesson.id as lesson_id, lesson.lesson_name," +
+                    "lesson.lesson_type FROM schedule " +
+                    "INNER JOIN teacher ON teacher.id = schedule.teacher_id " +
+                    "INNER JOIN room ON room.id = schedule.room_id INNER JOIN lesson ON " +
+                    "lesson.id = schedule.lesson_id WHERE group_number = ? AND schedule.lesson_id = ?";
+    private static final String ADD_LESSON_TO_SCHEDULE = "INSERT INTO schedule (date_time, group_number," +
+            " teacher_id, room_id, lesson_id) VALUES (?,?,?,?,?)";
+    private static final String REMOVE_LESSON_FROM_SCHEDULE = "DELETE FROM schedule WHERE group_number = ?" +
+            " AND date_time = ?";
+    private static final String GET_STUDENT_IDS_BY_GROUP = "SELECT student_id, username, surname FROM groups INNER JOIN student ON groups.student_id = student.id WHERE group_number = ? ";
+    private static final String GET_STUDENTS_MARK = "SELECT student_id, mark, absent FROM marks WHERE schedule_id = ?";
 
     @Autowired
     private DataSource dataSource;
@@ -52,7 +61,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
         throw new UnsupportedOperationException();
     }
 
-
+    @Override
     public GroupSchedule select(String groupNumber) throws DaoException {
         PreparedStatement preparedStatement = null;
         GroupSchedule groupSchedule = new GroupSchedule();
@@ -79,6 +88,72 @@ public class ScheduleDaoImpl implements ScheduleDao {
         return groupSchedule;
     }
 
+    @Override
+    public GroupSchedule select(String groupNumber, int lessonId) throws DaoException {
+        PreparedStatement preparedStatement = null;
+        PreparedStatement nestedStatement = null;
+        GroupSchedule groupSchedule = new GroupSchedule();
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            preparedStatement = connection.prepareStatement(GET_STUDENT_IDS_BY_GROUP);
+            preparedStatement.setString(1, groupNumber);
+            ResultSet rs = preparedStatement.executeQuery();
+            Map<Integer, StudentMarks> studentsMarks = new LinkedHashMap<>();
+            while (rs.next()) {
+                int id = rs.getInt(RowValues.STUDENT_ID);
+                StudentMarks marks = new StudentMarks();
+                marks.setStudentId(id);
+                marks.setStudentName(rs.getString(RowValues.USERNAME));
+                marks.setStudentSurname(rs.getString(RowValues.SURNAME));
+                studentsMarks.put(id, marks);
+            }
+            if (preparedStatement != null && !preparedStatement.isClosed()) {
+                preparedStatement.close();
+            }
+            preparedStatement = connection.prepareStatement(SELECT_BY_GROUP_NUMBER_AND_LESSON_ID_FROM_GROUP);
+            preparedStatement.setString(1, groupNumber);
+            preparedStatement.setInt(2, lessonId);
+            rs = preparedStatement.executeQuery();
+            int i = 0;
+            while (rs.next()) {
+                groupSchedule = addInfoToSchedule(groupSchedule, rs);
+                nestedStatement = connection.prepareStatement(GET_STUDENTS_MARK);
+                nestedStatement.setInt(1, groupSchedule.getCalendarLessons().get(i).getScheduleId());
+                ResultSet nestedRs = nestedStatement.executeQuery();
+                while (nestedRs.next()) {
+                    StudentMarks marks = studentsMarks.get(nestedRs.getInt(RowValues.STUDENT_ID));
+                    marks.addMark(nestedRs.getInt(RowValues.MARK), nestedRs.getBoolean(RowValues.ABSENT));
+                }
+                for (Map.Entry<Integer, StudentMarks> entry : studentsMarks.entrySet())
+                {
+                    StudentMarks value = entry.getValue();
+
+                    if (value.getMarks().size() == i || value.getAbsents().size() == i) {
+                        value.addMark(null, false);
+                    }
+                }
+                i ++;
+            }
+            for (Integer key : studentsMarks.keySet()) {
+                groupSchedule.addStudentMarks(studentsMarks.get(key));
+            }
+
+        } catch (SQLException e) {
+            throw new DaoException("SQL FAILED", e);
+        } finally {
+            try {
+                if (preparedStatement != null && !preparedStatement.isClosed()) {
+                    preparedStatement.close();
+                }
+            } catch (SQLException e) {
+                //TODO.. Log this
+            }
+        }
+        return groupSchedule;
+    }
+
+    @Override
     public void addLesson(String dateTime, Group group, Teacher teacher, Lesson lesson, Room room) throws DaoException {
         PreparedStatement preparedStatement = null;
         Connection connection = null;
@@ -107,6 +182,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
         }
     }
 
+    @Override
     public void removeLesson(Group group, String dateTime) throws DaoException {
         PreparedStatement preparedStatement = null;
         Connection connection = null;
@@ -167,7 +243,15 @@ public class ScheduleDaoImpl implements ScheduleDao {
         lesson.setLessonName(resultSet.getString(RowValues.LESSON_NAME));
         lesson.setLessonType(LessonType.getLessonTypeByValue(resultSet.getString(RowValues.LESSON_TYPE)));
 
-        groupSchedule.addLesson(resultSet.getString(RowValues.ROOM_NUMBER), teacher, lesson, resultSet.getDate(RowValues.DATE_TIME));
+        CalendarLesson calendarLesson = new CalendarLesson();
+        calendarLesson.setScheduleId(resultSet.getInt(RowValues.SCHEDULE_ID));
+        calendarLesson.setDate(resultSet.getDate(RowValues.DATE_TIME));
+        calendarLesson.setGroupNumber(RowValues.GROUP_NUMBER);
+        calendarLesson.setLesson(lesson);
+        calendarLesson.setTeacher(teacher);
+        calendarLesson.setRoomNumber(resultSet.getString(RowValues.ROOM_NUMBER));
+
+        groupSchedule.addCalendarLesson(calendarLesson);
         return groupSchedule;
     }
 

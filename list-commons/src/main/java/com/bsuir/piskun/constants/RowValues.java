@@ -32,4 +32,12 @@ public class RowValues {
     public static final String LESSON_ID = "lesson_id";
 
     public static final String POSITION = "position";
+
+    public static final String STUDENT_ID = "student_id";
+
+    public static final String SCHEDULE_ID = "schedule_id";
+
+    public static final String MARK = "mark";
+
+    public static final String ABSENT = "absent";
 }

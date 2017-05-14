@@ -18,133 +18,29 @@
     <thead>
     <tr>
         <th>Имя Студента</th>
-        <th>18/06/2017</th>
-        <th>19/06/2017</th>
-        <th>20/06/2017</th>
+        <c:forEach var="lesson" items="${lessons}" varStatus="status">
+            <th><c:out value="${lesson.date}"/></th>
+        </c:forEach>
     </tr>
     </thead>
 
     <tbody>
-    <tr>
-        <td>Пискун Алексей</td>
-        <td>
-            <span class="mark-span">8</span>
-            <c:if test="${currentRank == 3}">
-                <button class="btn btn-primary btn-xs mark-button" data-title="Edit" data-toggle="modal"
-                        data-target="#edit">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </button>
-            </c:if>
-        </td>
-        <td>
-            <span class="mark-span"></span>
-            <c:if test="${currentRank == 3}">
-                <button class="btn btn-primary btn-xs mark-button" data-title="Edit" data-toggle="modal"
-                        data-target="#edit">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </button>
-            </c:if>
-        </td>
-        <td>
-            <span class="mark-span">9</span>
-            <c:if test="${currentRank == 3}">
-                <button class="btn btn-primary btn-xs mark-button" data-title="Edit" data-toggle="modal"
-                        data-target="#edit">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </button>
-            </c:if>
-        </td>
-    </tr>
-    <tr>
-        <td>Евгений Шилов</td>
-        <td>
-            <span class="mark-span"></span>
-            <c:if test="${currentRank == 3}">
-                <button class="btn btn-primary btn-xs mark-button" data-title="Edit" data-toggle="modal"
-                        data-target="#edit">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </button>
-            </c:if>
-        </td>
-        <td>
-            <span class="mark-span"></span>
-            <c:if test="${currentRank == 3}">
-                <button class="btn btn-primary btn-xs mark-button" data-title="Edit" data-toggle="modal"
-                        data-target="#edit">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </button>
-            </c:if>
-        </td>
-        <td>
-            <span class="mark-span">9</span>
-            <c:if test="${currentRank == 3}">
-                <button class="btn btn-primary btn-xs mark-button" data-title="Edit" data-toggle="modal"
-                        data-target="#edit">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </button>
-            </c:if>
-        </td>
-    </tr>
-    <tr>
-        <td>Станислав Маковский</td>
-        <td>
-            <span class="mark-span">5</span>
-            <c:if test="${currentRank == 3}">
-                <button class="btn btn-primary btn-xs mark-button" data-title="Edit" data-toggle="modal"
-                        data-target="#edit">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </button>
-            </c:if>
-        </td>
-        <td>
-            <span class="mark-span">2</span>
-            <c:if test="${currentRank == 3}">
-                <button class="btn btn-primary btn-xs mark-button" data-title="Edit" data-toggle="modal"
-                        data-target="#edit">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </button>
-            </c:if>
-        </td>
-        <td>
-            <span class="mark-span">7</span>
-            <c:if test="${currentRank == 3}">
-                <button class="btn btn-primary btn-xs mark-button" data-title="Edit" data-toggle="modal"
-                        data-target="#edit">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </button>
-            </c:if>
-        </td>
-    </tr>
-    <tr>
-        <td>Марук Евгений</td>
-        <td>
-            <span class="mark-span">6</span>
-            <c:if test="${currentRank == 3}">
-                <button class="btn btn-primary btn-xs mark-button" data-title="Edit" data-toggle="modal"
-                        data-target="#edit">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </button>
-            </c:if>
-        </td>
-        <td>
-            <span class="mark-span"></span>
-            <c:if test="${currentRank == 3}">
-                <button class="btn btn-primary btn-xs mark-button" data-title="Edit" data-toggle="modal"
-                        data-target="#edit">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </button>
-            </c:if>
-        </td>
-        <td>
-            <span class="mark-span">10</span>
-            <c:if test="${currentRank == 3}">
-                <button class="btn btn-primary btn-xs mark-button" data-title="Edit" data-toggle="modal"
-                        data-target="#edit">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </button>
-            </c:if>
-        </td>
-    </tr>
+    <c:forEach var="student" items="${students}" varStatus="status">
+        <tr>
+            <td><c:out value="${student.studentName}"/> <c:out value="${student.studentSurname}"/></td>
+            <c:forEach var="mark" items="${student.marks}" varStatus="status">
+                <td>
+                    <span class="mark-span"><c:out value="${mark}"/></span>
+                    <c:if test="${currentRank == 3}">
+                        <button class="btn btn-primary btn-xs mark-button" data-title="Edit" data-toggle="modal"
+                                data-target="#edit">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                    </c:if>
+                </td>
+            </c:forEach>
+        </tr>
+    </c:forEach>
     </tbody>
 </table>
 </body>

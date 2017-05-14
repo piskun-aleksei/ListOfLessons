@@ -81,6 +81,15 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
+    public GroupSchedule select(String groupNumber, int lessonId) throws ServiceException {
+        try {
+            return scheduleDao.select(groupNumber, lessonId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public void addLesson(String dateTime, Group group, Teacher teacher, Lesson lesson, Room room) throws ServiceException {
         try {
             scheduleDao.addLesson(dateTime, group, teacher, lesson, room);
