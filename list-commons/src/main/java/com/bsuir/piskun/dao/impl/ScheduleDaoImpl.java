@@ -30,7 +30,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
                     "lesson.lesson_type FROM schedule " +
                     "INNER JOIN teacher ON teacher.id = schedule.teacher_id " +
                     "INNER JOIN room ON room.id = schedule.room_id INNER JOIN lesson ON " +
-                    "lesson.id = schedule.lesson_id WHERE group_number = ? AND schedule.lesson_id = ?";
+                    "lesson.id = schedule.lesson_id WHERE group_number = ? AND schedule.lesson_id = ? ORDER BY date_time";
     private static final String ADD_LESSON_TO_SCHEDULE = "INSERT INTO schedule (date_time, group_number," +
             " teacher_id, room_id, lesson_id) VALUES (?,?,?,?,?)";
     private static final String REMOVE_LESSON_FROM_SCHEDULE = "DELETE FROM schedule WHERE group_number = ?" +
