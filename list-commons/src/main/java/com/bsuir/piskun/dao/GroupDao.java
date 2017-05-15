@@ -10,7 +10,7 @@ public interface GroupDao extends BasicDao<Group> {
 
     List<String> select() throws DaoException;
 
-    Group select(String name) throws DaoException;
+    Group select(String groupNumber) throws DaoException;
 
     void removeStudent(Group group, Student student) throws DaoException;
 

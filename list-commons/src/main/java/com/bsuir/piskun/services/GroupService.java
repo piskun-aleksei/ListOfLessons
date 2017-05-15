@@ -10,7 +10,7 @@ public interface GroupService extends BasicService<Group> {
 
     List<String> select() throws ServiceException;
 
-    Group select(String name) throws ServiceException;
+    Group select(String groupNumber) throws ServiceException;
 
     void removeStudent(Group group, Student student) throws ServiceException;
 

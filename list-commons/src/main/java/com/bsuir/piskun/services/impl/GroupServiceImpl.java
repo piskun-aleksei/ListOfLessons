@@ -83,9 +83,9 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public Group select(String name) throws ServiceException {
+    public Group select(String groupNumber) throws ServiceException {
         try {
-            return groupDao.select(name);
+            return groupDao.select(groupNumber);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
