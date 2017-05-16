@@ -7,8 +7,6 @@ import java.util.List;
 public interface BasicService <T> {
     void insert(T data) throws ServiceException;
 
-    List<T> select(T data) throws ServiceException;
-
     void delete(T data) throws ServiceException;
 
     void update(T data) throws ServiceException;

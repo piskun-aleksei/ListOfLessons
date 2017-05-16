@@ -49,11 +49,7 @@ public class LessonDaoImpl implements LessonDao {
         }
     }
 
-    public List<Lesson> select(Lesson data) throws DaoException {
-        throw new UnsupportedOperationException();
-    }
-
-
+    @Override
     public List<Lesson> select() throws DaoException {
         PreparedStatement preparedStatement = null;
         Connection connection = null;
@@ -79,10 +75,12 @@ public class LessonDaoImpl implements LessonDao {
         return lessons;
     }
 
+    @Override
     public void delete(Lesson data) throws DaoException {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public void update(Lesson data) throws DaoException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;

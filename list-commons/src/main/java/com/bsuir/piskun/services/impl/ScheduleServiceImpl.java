@@ -25,15 +25,6 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public List<GroupSchedule> select(GroupSchedule data) throws ServiceException {
-        try {
-            return scheduleDao.select(data);
-        } catch (DaoException e) {
-            throw new ServiceException(e);
-        }
-    }
-
-    @Override
     @Transactional(rollbackFor = DaoException.class)
     public void delete(GroupSchedule data) throws ServiceException {
         try {

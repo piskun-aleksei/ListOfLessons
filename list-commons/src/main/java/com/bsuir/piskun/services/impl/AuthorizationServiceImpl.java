@@ -53,15 +53,6 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     }
 
     @Override
-    public List<User> select(User data) throws ServiceException {
-        try {
-            return authorizationDao.select(data);
-        } catch (DaoException e) {
-            throw new ServiceException(e);
-        }
-    }
-
-    @Override
     @Transactional(rollbackFor = DaoException.class)
     public void delete(User data) throws ServiceException {
         try {

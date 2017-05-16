@@ -36,15 +36,6 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public List<Group> select(Group data) throws ServiceException {
-        try {
-            return groupDao.select(data);
-        } catch (DaoException e) {
-            throw new ServiceException(e);
-        }
-    }
-
-    @Override
     @Transactional(rollbackFor = DaoException.class)
     public void delete(Group data) throws ServiceException {
         try {

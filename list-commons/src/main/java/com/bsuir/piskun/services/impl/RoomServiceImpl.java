@@ -45,15 +45,6 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public List<Room> select(Room data) throws ServiceException {
-        try {
-            return roomDao.select(data);
-        } catch (DaoException e) {
-            throw new ServiceException(e);
-        }
-    }
-
-    @Override
     @Transactional(rollbackFor = DaoException.class)
     public void delete(Room data) throws ServiceException {
         try {

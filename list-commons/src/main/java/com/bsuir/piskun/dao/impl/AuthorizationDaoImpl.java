@@ -30,6 +30,7 @@ public class AuthorizationDaoImpl implements AuthorizationDao {
     @Autowired
     private DataSource dataSource;
 
+    @Override
     public void insert(User data) throws DaoException {
         PreparedStatement preparedStatement = null;
         Connection connection = null;
@@ -53,10 +54,7 @@ public class AuthorizationDaoImpl implements AuthorizationDao {
         }
     }
 
-    public List<User> select(User data) throws DaoException {
-        throw new UnsupportedOperationException();
-    }
-
+    @Override
     public User select(String login) throws DaoException {
         PreparedStatement preparedStatement = null;
         User user = null;
@@ -83,6 +81,7 @@ public class AuthorizationDaoImpl implements AuthorizationDao {
         return user;
     }
 
+    @Override
     public User select(String login, String password) throws DaoException {
         PreparedStatement preparedStatement = null;
         User user = null;
@@ -110,6 +109,7 @@ public class AuthorizationDaoImpl implements AuthorizationDao {
         return user;
     }
 
+    @Override
     public List<User> select() throws DaoException {
         PreparedStatement preparedStatement = null;
         Connection connection = null;
@@ -135,10 +135,12 @@ public class AuthorizationDaoImpl implements AuthorizationDao {
         return users;
     }
 
+    @Override
     public void delete(User data) throws DaoException {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public void update(User data) throws DaoException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;

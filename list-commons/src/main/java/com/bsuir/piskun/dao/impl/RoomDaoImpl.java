@@ -26,6 +26,7 @@ public class RoomDaoImpl implements RoomDao {
     @Autowired
     private DataSource dataSource;
 
+    @Override
     public void insert(Room data) throws DaoException {
         PreparedStatement preparedStatement = null;
         Connection connection = null;
@@ -47,11 +48,7 @@ public class RoomDaoImpl implements RoomDao {
         }
     }
 
-    public List<Room> select(Room data) throws DaoException {
-        throw new UnsupportedOperationException();
-    }
-
-
+    @Override
     public List<Room> select() throws DaoException {
         PreparedStatement preparedStatement = null;
         Connection connection = null;
@@ -104,10 +101,12 @@ public class RoomDaoImpl implements RoomDao {
         return room;
     }
 
+    @Override
     public void delete(Room data) throws DaoException {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public void update(Room data) throws DaoException {
         Connection connection = null;
         PreparedStatement preparedStatement = null;

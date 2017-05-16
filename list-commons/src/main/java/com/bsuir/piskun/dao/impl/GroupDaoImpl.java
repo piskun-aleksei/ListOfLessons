@@ -27,14 +27,12 @@ public class GroupDaoImpl implements GroupDao {
     @Autowired
     private DataSource dataSource;
 
+    @Override
     public void insert(Group data) throws DaoException {
         throw new UnsupportedOperationException();
     }
 
-    public List<Group> select(Group data) throws DaoException {
-        throw new UnsupportedOperationException();
-    }
-    
+    @Override
     public Group select(String groupNumber) throws DaoException {
         PreparedStatement preparedStatement = null;
         Group group = null;
@@ -113,6 +111,7 @@ public class GroupDaoImpl implements GroupDao {
         }
     }
 
+    @Override
     public List<String> select() throws DaoException {
         PreparedStatement preparedStatement = null;
         Connection connection = null;
@@ -138,10 +137,12 @@ public class GroupDaoImpl implements GroupDao {
         return groups;
     }
 
+    @Override
     public void delete(Group data) throws DaoException {
         throw new UnsupportedOperationException();
     }
 
+    @Override
     public void update(Group data) throws DaoException {
         throw new UnsupportedOperationException();
     }

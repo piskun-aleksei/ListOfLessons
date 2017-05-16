@@ -36,15 +36,6 @@ public class LessonServiceImpl implements LessonService {
     }
 
     @Override
-    public List<Lesson> select(Lesson data) throws ServiceException {
-        try {
-            return lessonDao.select(data);
-        } catch (DaoException e) {
-            throw new ServiceException(e);
-        }
-    }
-
-    @Override
     @Transactional(rollbackFor = DaoException.class)
     public void delete(Lesson data) throws ServiceException {
         try {

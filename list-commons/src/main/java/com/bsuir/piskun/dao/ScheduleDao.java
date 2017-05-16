@@ -7,6 +7,8 @@ import com.bsuir.piskun.beans.Room;
 import com.bsuir.piskun.beans.Teacher;
 import com.bsuir.piskun.exceptions.DaoException;
 
+import java.util.List;
+
 public interface ScheduleDao extends BasicDao<GroupSchedule> {
 
     GroupSchedule select(String groupNumber) throws DaoException;
@@ -16,5 +18,7 @@ public interface ScheduleDao extends BasicDao<GroupSchedule> {
     void removeLesson(Group group, String dateTime) throws DaoException;
 
     GroupSchedule select(String groupNumber, int lessonId) throws DaoException;
+
+    List<GroupSchedule> select() throws DaoException;
 
 }

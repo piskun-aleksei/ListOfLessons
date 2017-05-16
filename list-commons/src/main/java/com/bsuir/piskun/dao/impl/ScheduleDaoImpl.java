@@ -47,11 +47,6 @@ public class ScheduleDaoImpl implements ScheduleDao {
     }
 
     @Override
-    public List<GroupSchedule> select(GroupSchedule data) throws DaoException {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
     public void delete(GroupSchedule data) throws DaoException {
         throw new UnsupportedOperationException();
     }
@@ -208,15 +203,8 @@ public class ScheduleDaoImpl implements ScheduleDao {
         }
     }
 
-    public List<String> select() throws DaoException {
-        throw new UnsupportedOperationException();
-    }
-
-    public void delete(Group data) throws DaoException {
-        throw new UnsupportedOperationException();
-    }
-
-    public void update(Group data) throws DaoException {
+    @Override
+    public List<GroupSchedule> select() throws DaoException {
         throw new UnsupportedOperationException();
     }
 
