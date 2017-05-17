@@ -49,8 +49,13 @@
                     <ul class="dropdown-menu" role="menu">
                         <li>
                             <form class="form" role="form" method="get" action="schedule" id="scheduleForm">
-                                <input type="text" id="userGroup" name="userGroup"/>
-                                <button type="button" id="scheduleButton" class="btn btn-success">Show schedule</button>
+                                <input type="text" id="userGroup" class="group-text" name="userGroup"/>
+                                <select name="lessonId" class="lesson-select">
+                                    <c:forEach var="lesson" items="${lessonList}" varStatus="status">
+                                        <option value="${lesson.lessonId}">${lesson.lessonName}(${lesson.lessonType.value})</option>
+                                    </c:forEach>
+                                </select>
+                                <button type="button" id="scheduleButton" class="btn btn-success button-schedule">Show schedule</button>
                                 <input type="hidden" name="cmd" value="schedule"/>
                             </form>
                         </li>

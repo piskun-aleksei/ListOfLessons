@@ -1,8 +1,10 @@
 package com.bsuir.piskun.controllers;
 
+import com.bsuir.piskun.beans.Lesson;
 import com.bsuir.piskun.beans.User;
 import com.bsuir.piskun.exceptions.ServiceException;
 import com.bsuir.piskun.services.AuthorizationService;
+import com.bsuir.piskun.services.LessonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class LoginController {
@@ -18,10 +21,20 @@ public class LoginController {
     @Autowired
     private AuthorizationService authorizationService;
 
+    @Autowired
+    private LessonService lessonService;
+
     @RequestMapping(value = {"/", "/public**"}, method = RequestMethod.GET)
     public ModelAndView requestPublic(HttpServletRequest request) {
         ModelAndView model = new ModelAndView();
         HttpSession session = request.getSession();
+        List<Lesson> lessonList = null;
+        try {
+            lessonList = lessonService.select();
+        } catch (ServiceException e) {
+            //TODO log this
+        }
+        session.setAttribute("lessonList", lessonList);
         session.setAttribute("currentPage", "login");
         session.setAttribute("currentRank", 0);
         model.setViewName("login");

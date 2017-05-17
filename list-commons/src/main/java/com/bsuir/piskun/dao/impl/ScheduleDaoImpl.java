@@ -35,7 +35,8 @@ public class ScheduleDaoImpl implements ScheduleDao {
             " teacher_id, room_id, lesson_id) VALUES (?,?,?,?,?)";
     private static final String REMOVE_LESSON_FROM_SCHEDULE = "DELETE FROM schedule WHERE group_number = ?" +
             " AND date_time = ?";
-    private static final String GET_STUDENT_IDS_BY_GROUP = "SELECT student_id, username, surname FROM groups INNER JOIN student ON groups.student_id = student.id WHERE group_number = ? ";
+    private static final String GET_STUDENT_IDS_BY_GROUP = "SELECT student_id, username, surname FROM groups INNER JOIN " +
+            "student ON groups.student_id = student.id WHERE group_number = ? ORDER BY concat(username,surname)";
     private static final String GET_STUDENTS_MARK = "SELECT student_id, mark, absent FROM marks WHERE schedule_id = ?";
 
     @Autowired

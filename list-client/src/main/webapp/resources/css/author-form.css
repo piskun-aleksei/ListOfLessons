@@ -126,3 +126,23 @@ form {
     display: inline;
     float: right;
 }
+
+
+
+
+
+.group-text {
+    width: 100%;
+    margin-bottom: 3px;
+}
+
+.lesson-select {
+    width: 100%;
+    margin-bottom: 3px;
+    border-radius: 3px;
+}
+
+.button-schedule {
+    width: 100%;
+    margin-bottom: 3px;
+}

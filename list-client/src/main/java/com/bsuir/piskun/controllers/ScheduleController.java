@@ -23,9 +23,10 @@ public class ScheduleController {
         ModelAndView model = new ModelAndView();
         HttpSession session = request.getSession();
         String group = request.getParameter("userGroup");
+        int lessonId = Integer.parseInt(request.getParameter("lessonId"));
         GroupSchedule groupSchedule = null;
         try {
-            groupSchedule = scheduleService.select(group, 1);
+            groupSchedule = scheduleService.select(group, lessonId);
         } catch (ServiceException e) {
             //TODO log this...
         }
