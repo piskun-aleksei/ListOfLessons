@@ -16,13 +16,13 @@
 
     <jsp:include page="./common/header.jsp"/>
 
-    <form class="form-horizontal custom-form" action="addRoom">
+    <form class="form-horizontal custom-form"  method="post" action="addRoom">
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Номер комнаты">
+            <input type="text" name="roomNumber" class="form-control" placeholder="Номер комнаты">
         </div>
 
         <button type="button" onclick="parentNode.submit();" id="formButton" class="btn btn-success button-schedule">
-                Add
+                Add room
         </button>
 
         <input type="hidden" name="cmd" value="addRoom"/>

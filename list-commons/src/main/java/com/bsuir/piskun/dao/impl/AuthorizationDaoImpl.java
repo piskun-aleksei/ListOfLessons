@@ -1,5 +1,7 @@
 package com.bsuir.piskun.dao.impl;
 
+import com.bsuir.piskun.beans.Student;
+import com.bsuir.piskun.beans.Teacher;
 import com.bsuir.piskun.beans.User;
 import com.bsuir.piskun.constants.RowValues;
 import com.bsuir.piskun.dao.AuthorizationDao;
@@ -21,9 +23,13 @@ public class AuthorizationDaoImpl implements AuthorizationDao {
     private static final String INSERT_INTO_USERS = "INSERT INTO users" +
             " (login, password, rank) VALUES" +
             " (?,?,?)";
+    private static final String INSERT_INTO_STUDENT = "INSERT INTO student" +
+            " (student_card_number, username, surname) VALUES" +
+            " (?,?,?)";
     private static final String SELECT_BY_LOGIN_FROM_USERS = "SELECT id, login, password, rank from users WHERE login = ?";
     private static final String SELECT_BY_LOGIN_AND_PASS_FROM_USERS = "SELECT id, login, password, rank from users WHERE login = ? AND password = ?";
     private static final String SELECT_ALL_FROM_USERS = "SELECT id, login, password, rank from users";
+    private static final String SELECT_ALL_FROM_TEACHER = "SELECT id, position, user_id, username, surname FROM teacher";
     private static final String UPDATE_USERS_BY_LOGIN = "UPDATE users SET (login, password, rank) VALUES" +
             " (?,?,?) WHERE login = ?";
 
@@ -42,6 +48,30 @@ public class AuthorizationDaoImpl implements AuthorizationDao {
             preparedStatement.setInt(3, data.getRank());
             preparedStatement.executeUpdate();
         } catch (SQLException | HashCreationException e) {
+            throw new DaoException("SQl OR HASH CREATION FAILED", e);
+        } finally {
+            try {
+                if (preparedStatement != null && !preparedStatement.isClosed()) {
+                    preparedStatement.close();
+                }
+            } catch (SQLException e) {
+                //TODO.. Log this
+            }
+        }
+    }
+
+    @Override
+    public void insertStudent(Student data) throws DaoException {
+        PreparedStatement preparedStatement = null;
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            preparedStatement = connection.prepareStatement(INSERT_INTO_STUDENT);
+            preparedStatement.setString(1, data.getStudentCardNumber());
+            preparedStatement.setString(2, data.getStudentName());
+            preparedStatement.setString(3, data.getStudentSurname());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
             throw new DaoException("SQl OR HASH CREATION FAILED", e);
         } finally {
             try {
@@ -136,6 +166,32 @@ public class AuthorizationDaoImpl implements AuthorizationDao {
     }
 
     @Override
+    public List<Teacher> selectTeachers() throws DaoException {
+        PreparedStatement preparedStatement = null;
+        Connection connection = null;
+        ArrayList<Teacher> teachers = new ArrayList<>();
+        try {
+            connection = dataSource.getConnection();
+            preparedStatement = connection.prepareStatement(SELECT_ALL_FROM_TEACHER);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                teachers.add(setTeacher(new Teacher(), rs));
+            }
+        } catch (SQLException e) {
+            throw new DaoException("SQL FAILED", e);
+        } finally {
+            try {
+                if (preparedStatement != null && !preparedStatement.isClosed()) {
+                    preparedStatement.close();
+                }
+            } catch (SQLException e) {
+                //TODO.. Log this
+            }
+        }
+        return teachers;
+    }
+
+    @Override
     public void delete(User data) throws DaoException {
         throw new UnsupportedOperationException();
     }
@@ -181,5 +237,14 @@ public class AuthorizationDaoImpl implements AuthorizationDao {
         user.setPassword(resultSet.getString(RowValues.PASSWORD));
         user.setRank(resultSet.getInt(RowValues.RANK));
         return user;
+    }
+
+    private Teacher setTeacher(Teacher teacher, ResultSet resultSet) throws SQLException {
+        teacher.setUserId(resultSet.getInt(RowValues.ID));
+        teacher.setPosition(resultSet.getString(RowValues.POSITION));
+        teacher.setUserId(resultSet.getInt(RowValues.USER_ID));
+        teacher.setTeacherName(resultSet.getString(RowValues.USERNAME));
+        teacher.setTeacherSurname(resultSet.getString(RowValues.SURNAME));
+        return teacher;
     }
 }

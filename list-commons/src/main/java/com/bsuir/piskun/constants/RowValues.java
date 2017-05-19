@@ -40,4 +40,6 @@ public class RowValues {
     public static final String MARK = "mark";
 
     public static final String ABSENT = "absent";
+
+    public static final String USER_ID = "user_id";
 }

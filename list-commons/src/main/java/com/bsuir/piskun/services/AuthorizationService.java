@@ -1,5 +1,7 @@
 package com.bsuir.piskun.services;
 
+import com.bsuir.piskun.beans.Student;
+import com.bsuir.piskun.beans.Teacher;
 import com.bsuir.piskun.beans.User;
 import com.bsuir.piskun.exceptions.ServiceException;
 
@@ -11,4 +13,8 @@ public interface AuthorizationService extends BasicService <User> {
     User select(String login, String password) throws ServiceException;
 
     List<User> select() throws ServiceException;
+
+    List<Teacher> selectTeachers() throws ServiceException;
+
+    void insertStudent(Student student) throws ServiceException;
 }

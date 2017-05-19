@@ -18,32 +18,35 @@
 
     <form class="form-horizontal custom-form" action="addSchedule">
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Дата">
+            <input type="text" class="form-control" name="scheduleDate" placeholder="Дата">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Номер группы">
+            <input type="text" class="form-control" name="scheduleGroup" placeholder="Номер группы">
         </div>
         <div class="form-group">
-            <select class="form-control">
-                <option>Кухарчук</option>
-                <option>Калабухов</option>
+            <select class="form-control" name="scheduleTeacher">
+                <c:forEach var="teacher" items="${teacherList}" varStatus="status">
+                    <option value="${teacher.teacherId}">${teacher.teacherName} ${teacher.teacherSurname}</option>
+                </c:forEach>
             </select>
         </div>
         <div class="form-group">
-            <select class="form-control">
-                <option>514</option>
-                <option>501</option>
+            <select class="form-control" name="scheduleRoom">
+                <c:forEach var="room" items="${roomList}" varStatus="status">
+                    <option value="${room.roomId}">${room.roomNumber}</option>
+                </c:forEach>
             </select>
         </div>
         <div class="form-group">
-            <select class="form-control">
-                <option>КПП</option>
-                <option>КПИЯП</option>
+            <select class="form-control" name="scheduleLesson">
+                <c:forEach var="lesson" items="${lessonList}" varStatus="status">
+                    <option value="${lesson.lessonId}">${lesson.lessonName}(${lesson.lessonType.value})</option>
+                </c:forEach>
             </select>
         </div>
 
         <button type="button" onclick="parentNode.submit();" id="formButton" class="btn btn-success button-schedule">
-                Add
+            Add schedule
         </button>
 
         <input type="hidden" name="cmd" value="addSchedule"/>

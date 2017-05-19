@@ -1,5 +1,7 @@
 package com.bsuir.piskun.services.impl;
 
+import com.bsuir.piskun.beans.Student;
+import com.bsuir.piskun.beans.Teacher;
 import com.bsuir.piskun.beans.User;
 import com.bsuir.piskun.dao.AuthorizationDao;
 import com.bsuir.piskun.exceptions.DaoException;
@@ -43,10 +45,30 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     }
 
     @Override
+    public List<Teacher> selectTeachers() throws ServiceException {
+        try {
+            return authorizationDao.selectTeachers();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+
+    @Override
     @Transactional(rollbackFor = DaoException.class)
     public void insert(User data) throws ServiceException {
         try {
             authorizationDao.insert(data);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    @Transactional(rollbackFor = DaoException.class)
+    public void insertStudent(Student data) throws ServiceException {
+        try {
+            authorizationDao.insertStudent(data);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

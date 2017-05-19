@@ -75,7 +75,7 @@
                         </li>
                         <li>
                             <form class="form" role="form" method="get" action="formsStudent">
-                                <a href="javascript:;" onclick="parentNode.submit();">User adding page</a>
+                                <a href="javascript:;" onclick="parentNode.submit();">Student adding page</a>
                                 <input type="hidden" name="cmd" value="formsUser"/>
                             </form>
                         </li>
