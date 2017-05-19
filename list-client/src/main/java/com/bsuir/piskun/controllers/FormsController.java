@@ -46,10 +46,9 @@ public class FormsController {
     public ModelAndView addFormsLesson(HttpServletRequest request) {
         ModelAndView model = new ModelAndView();
         try {
-            request.setCharacterEncoding("windows-1251");
 
             HttpSession session = request.getSession();
-            String lessonName = request.getParameter("lessonName");
+            String lessonName = decodeGetParameter(request.getParameter("lessonName"));
             String lessonType = request.getParameter("lessonType");
             Lesson lesson = new Lesson();
             lesson.setLessonName(lessonName);
@@ -94,5 +93,9 @@ public class FormsController {
         session.setAttribute("currentPage", "formRoom");
         model.setViewName("formRoom");
         return model;
+    }
+
+    public static String decodeGetParameter(String parameter) throws UnsupportedEncodingException {
+        return new String(parameter.getBytes("ISO-8859-1"),"UTF8");
     }
 }

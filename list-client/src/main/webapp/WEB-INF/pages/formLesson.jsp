@@ -7,7 +7,7 @@
 <html>
 <head>
     <title>Forms</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=cp1251"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 
 <body>
