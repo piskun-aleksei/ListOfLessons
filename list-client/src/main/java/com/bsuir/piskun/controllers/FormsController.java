@@ -28,13 +28,43 @@ public class FormsController {
     @Autowired
     private GroupService groupService;
 
-    @RequestMapping(value = "/forms", method = RequestMethod.GET)
-    public ModelAndView getForms(HttpServletRequest request) {
+    @RequestMapping(value = "/formsLesson", method = RequestMethod.GET)
+    public ModelAndView getFormsLesson(HttpServletRequest request) {
         ModelAndView model = new ModelAndView();
         HttpSession session = request.getSession();
 
-        session.setAttribute("currentPage", "forms");
-        model.setViewName("forms");
+        session.setAttribute("currentPage", "formLesson");
+        model.setViewName("formLesson");
+        return model;
+    }
+
+    @RequestMapping(value = "/formsSchedule", method = RequestMethod.GET)
+    public ModelAndView getFormsSchedule(HttpServletRequest request) {
+        ModelAndView model = new ModelAndView();
+        HttpSession session = request.getSession();
+
+        session.setAttribute("currentPage", "formSchedule");
+        model.setViewName("formSchedule");
+        return model;
+    }
+
+    @RequestMapping(value = "/formsStudent", method = RequestMethod.GET)
+    public ModelAndView getFormsStudent(HttpServletRequest request) {
+        ModelAndView model = new ModelAndView();
+        HttpSession session = request.getSession();
+
+        session.setAttribute("currentPage", "formStudent");
+        model.setViewName("formStudent");
+        return model;
+    }
+
+    @RequestMapping(value = "/formsRoom", method = RequestMethod.GET)
+    public ModelAndView getFormsRoom(HttpServletRequest request) {
+        ModelAndView model = new ModelAndView();
+        HttpSession session = request.getSession();
+
+        session.setAttribute("currentPage", "formRoom");
+        model.setViewName("formRoom");
         return model;
     }
 }

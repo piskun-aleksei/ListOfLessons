@@ -60,12 +60,32 @@
                             <input type="hidden" name="cmd" value="schedule"/>
                         </form>
                     </li>
-                    <li>
-                        <form class="form" role="form" method="get" action="forms">
-                            <a href="javascript:;" onclick="parentNode.submit();">Forms page</a>
-                            <input type="hidden" name="cmd" value="forms"/>
-                        </form>
-                    </li>
+                    <c:if test="${currentRank == 5}">
+                        <li>
+                            <form class="form" role="form" method="get" action="formsLesson">
+                                <a href="javascript:;" onclick="parentNode.submit();">Lessons adding page</a>
+                                <input type="hidden" name="cmd" value="formsLesson"/>
+                            </form>
+                        </li>
+                        <li>
+                                                    <form class="form" role="form" method="get" action="formsSchedule">
+                                                        <a href="javascript:;" onclick="parentNode.submit();">Schedule lesson adding page</a>
+                                                        <input type="hidden" name="cmd" value="formsSchedule"/>
+                                                    </form>
+                                                </li>
+                                                <li>
+                                                                            <form class="form" role="form" method="get" action="formsStudent">
+                                                                                <a href="javascript:;" onclick="parentNode.submit();">User adding page</a>
+                                                                                <input type="hidden" name="cmd" value="formsUser"/>
+                                                                            </form>
+                                                                        </li>
+                                                                        <li>
+                                                                                                    <form class="form" role="form" method="get" action="formsRoom">
+                                                                                                        <a href="javascript:;" onclick="parentNode.submit();">Room adding page</a>
+                                                                                                        <input type="hidden" name="cmd" value="formsRoom"/>
+                                                                                                    </form>
+                                                                                                </li>
+                    </c:if>
                     <li class="divider"></li>
                     <li>
                         <form class="form" role="form" method="get" action="home">

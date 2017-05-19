@@ -16,23 +16,28 @@
 
     <jsp:include page="./common/header.jsp"/>
 
+    <form class="form-horizontal custom-form" action="addUser">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Номер студенческого">
+        </div>
+        <div class="form-group">
+            <select class="form-control">
+                <option>Brotorias</option>
+                <option>CheckUser</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Имя">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Фамилия">
+        </div>
 
-    <form class="form-horizontal custom-form">
-        <div class="form-group">
-            <input type="text" class="form-control input-lg" placeholder="Большой">
-        </div>
-        <div class="form-group">
-            <select class="form-control input-lg">
-                <option>Средний - 1</option>
-                <option>Средний - 2</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <select class="form-control input-lg">
-                <option>Маленький - 1</option>
-                <option>Маленький - 2</option>
-            </select>
-        </div>
+        <button type="button" onclick="parentNode.submit();" id="formButton" class="btn btn-success button-schedule">
+                Add
+        </button>
+
+        <input type="hidden" name="cmd" value="addUser"/>
     </form>
 </div>
 </body>
