@@ -31,7 +31,8 @@
 
 body {
     background: url('../img/background.jpg');
-    padding: 50px;
+    /*background: #edeef0;*/
+    /*padding: 50px;*/
 }
 
 #login-dp {
@@ -145,4 +146,28 @@ form {
 .button-schedule {
     width: 100%;
     margin-bottom: 3px;
+}
+
+.center {
+    margin: 0 auto;
+    width: 80%;
+}
+
+body > .container, html, body {
+    padding: 0;
+    height: 100%;
+}
+
+body > .container {
+    box-shadow: 3px 3px 10px rgba(0,0,0,.5);
+    /* padding-top: 0; */
+    /* padding: 40px; */
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.29);
+}
+
+.custom-form {
+    width: 600px;
+    max-width: 100%;
+    margin: 30px auto 0;
 }

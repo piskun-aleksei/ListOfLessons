@@ -11,8 +11,8 @@
 </head>
 
 <body>
-
+<div class="container">
 <jsp:include page="./common/header.jsp" />
-
+</div>
 </body>
 </html>
