@@ -1,5 +1,8 @@
 package com.bsuir.piskun.controllers;
 
+import com.bsuir.piskun.beans.Lesson;
+import com.bsuir.piskun.constants.LessonType;
+import com.bsuir.piskun.exceptions.ServiceException;
 import com.bsuir.piskun.services.AuthorizationService;
 import com.bsuir.piskun.services.GroupService;
 import com.bsuir.piskun.services.LessonService;
@@ -12,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
 
 @Controller
 public class FormsController {
@@ -35,6 +39,30 @@ public class FormsController {
 
         session.setAttribute("currentPage", "formLesson");
         model.setViewName("formLesson");
+        return model;
+    }
+
+    @RequestMapping(value = "/addLesson", method = RequestMethod.POST)
+    public ModelAndView addFormsLesson(HttpServletRequest request) {
+        ModelAndView model = new ModelAndView();
+        try {
+            request.setCharacterEncoding("windows-1251");
+
+            HttpSession session = request.getSession();
+            String lessonName = request.getParameter("lessonName");
+            String lessonType = request.getParameter("lessonType");
+            Lesson lesson = new Lesson();
+            lesson.setLessonName(lessonName);
+            lesson.setLessonType(LessonType.getLessonTypeByValue(lessonType));
+
+            lessonService.insert(lesson);
+
+            session.setAttribute("currentPage", "formLesson");
+            model.setViewName("formLesson");
+        } catch (ServiceException | UnsupportedEncodingException e) {
+            //TODO log this
+        }
+
         return model;
     }
 

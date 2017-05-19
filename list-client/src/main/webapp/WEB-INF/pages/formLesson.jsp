@@ -7,7 +7,7 @@
 <html>
 <head>
     <title>Forms</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=cp1251"/>
 </head>
 
 <body>
@@ -16,19 +16,22 @@
 
     <jsp:include page="./common/header.jsp"/>
 
-    <form class="form-horizontal custom-form" action="addLesson">
+    <form class="form-horizontal custom-form" method="post" action="addLesson">
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Название занятия">
+            <input type="text" name="lessonName" class="form-control" placeholder="Название занятия">
         </div>
         <div class="form-group">
-            <select class="form-control">
-                <option>Lab</option>
-                <option>Pract</option>
+            <select name="lessonType" class="form-control">
+                <option>Laboratory</option>
+                <option>Practical</option>
+                <option>Lecture</option>
+                <option>Test</option>
+                <option>Exam</option>
             </select>
         </div>
 
          <button type="button" onclick="parentNode.submit();" id="formButton" class="btn btn-success button-schedule">
-                Add
+                Add Lesson
          </button>
 
          <input type="hidden" name="cmd" value="addLesson"/>
