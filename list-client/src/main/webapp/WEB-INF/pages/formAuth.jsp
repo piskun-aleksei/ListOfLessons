@@ -7,7 +7,7 @@
 <html>
 <head>
     <title>Forms</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 
 <body>
@@ -16,17 +16,24 @@
 
     <jsp:include page="./common/header.jsp"/>
 
-    <form class="form-horizontal custom-form"  method="post" action="addRoom">
+    <form class="form-horizontal custom-form" method="post" action="login">
         <div class="form-group">
-            <input type="text" name="roomNumber" class="form-control" placeholder="Номер комнаты">
+            <input type="text" class="form-control" id="login" name="login"
+                   placeholder="Логин" required>
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" id="password"
+                   name="password"
+                   placeholder="Пароль" required>
         </div>
 
         <button type="button" onclick="parentNode.submit();" id="formButton" class="btn btn-success button-schedule">
-                Добавить комнату
+            Войти в систему
         </button>
 
-        <input type="hidden" name="cmd" value="addRoom"/>
+        <input type="hidden" name="cmd" value="login"/>
     </form>
+
 </div>
 </body>
 

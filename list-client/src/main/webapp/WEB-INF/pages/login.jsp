@@ -12,7 +12,25 @@
 
 <body>
 <div class="container">
-<jsp:include page="./common/header.jsp" />
+    <jsp:include page="./common/header.jsp"/>
+
+    <div class="jumbotron">
+        <h1 class="display-3">Журнал занятий</h1>
+        <p class="lead">
+            Добро пожаловать в электронную систему по учету успеваемости и посещаемости студентов.
+        </p>
+
+
+        <c:if test="${currentLogin == null}">
+            <p class="lead">
+                Пожалуйста, войдите в систему, чтобы иметь доступ к полному спектру возможностей.
+            </p>
+            <form class="form" role="form" method="get" action="loginPage">
+                <a class="btn btn-lg btn-success" href="javascript:;" onclick="parentNode.submit();">Войти в систему</a>
+                <input type="hidden" name="cmd" value="loginPage"/>
+            </form>
+        </c:if>
+    </div>
 </div>
 </body>
 </html>

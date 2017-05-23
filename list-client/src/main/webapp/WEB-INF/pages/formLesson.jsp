@@ -31,7 +31,7 @@
         </div>
 
          <button type="button" onclick="parentNode.submit();" id="formButton" class="btn btn-success button-schedule">
-                Add Lesson
+                Добавить предмет
          </button>
 
          <input type="hidden" name="cmd" value="addLesson"/>

@@ -2,8 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
     <spring:url value="/resources/css/author-form.css" var="authorcss"/>
@@ -33,10 +32,10 @@
     <div class="navbar-header">
             <span class="navbar-brand">
                 <c:if test="${currentLogin != null}">
-                    Login is: ${currentLogin}
+                    Ваш логин: ${currentLogin}
                 </c:if>
                 <c:if test="${currentLogin == null}">
-                    You are not logged in
+                    Вы не вошли в систему
                 </c:if>
             </span>
     </div>
@@ -44,7 +43,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Navigation<span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Навигация<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li>
                         <form class="form" role="form" method="get" action="schedule" id="scheduleForm">
@@ -54,8 +53,8 @@
                                     <option value="${lesson.lessonId}">${lesson.lessonName}(${lesson.lessonType.value})</option>
                                 </c:forEach>
                             </select>
-                            <button type="button" id="scheduleButton" class="btn btn-success button-schedule">Show
-                                schedule
+                            <button type="button" id="scheduleButton" class="btn btn-success button-schedule">
+                                Показать расписание
                             </button>
                             <input type="hidden" name="cmd" value="schedule"/>
                         </form>
@@ -63,25 +62,25 @@
                     <c:if test="${currentRank == 5}">
                         <li>
                             <form class="form" role="form" method="get" action="formsLesson">
-                                <a href="javascript:;" onclick="parentNode.submit();">Lessons adding page</a>
+                                <a href="javascript:;" onclick="parentNode.submit();">Добавить предмет</a>
                                 <input type="hidden" name="cmd" value="formsLesson"/>
                             </form>
                         </li>
                         <li>
                             <form class="form" role="form" method="get" action="formsSchedule">
-                                <a href="javascript:;" onclick="parentNode.submit();">Schedule lesson adding page</a>
+                                <a href="javascript:;" onclick="parentNode.submit();">Добавить занятие</a>
                                 <input type="hidden" name="cmd" value="formsSchedule"/>
                             </form>
                         </li>
                         <li>
                             <form class="form" role="form" method="get" action="formsStudent">
-                                <a href="javascript:;" onclick="parentNode.submit();">Student adding page</a>
+                                <a href="javascript:;" onclick="parentNode.submit();">Добавить студента</a>
                                 <input type="hidden" name="cmd" value="formsUser"/>
                             </form>
                         </li>
                         <li>
                             <form class="form" role="form" method="get" action="formsRoom">
-                                <a href="javascript:;" onclick="parentNode.submit();">Room adding page</a>
+                                <a href="javascript:;" onclick="parentNode.submit();">Добавить аудиторию</a>
                                 <input type="hidden" name="cmd" value="formsRoom"/>
                             </form>
                         </li>
@@ -89,7 +88,7 @@
                     <li class="divider"></li>
                     <li>
                         <form class="form" role="form" method="get" action="home">
-                            <a href="javascript:;" onclick="parentNode.submit();">Back to the home page</a>
+                            <a href="javascript:;" onclick="parentNode.submit();">Назад на главную</a>
                             <input type="hidden" name="cmd" value="home"/>
                         </form>
                     </li>
@@ -98,9 +97,9 @@
         </ul>
         <ul class="nav navbar-nav navbar-right header-navbar">
             <c:if test="${currentLogin == null}">
-                <li><p class="navbar-text">Already have an account?</p></li>
+                <li><p class="navbar-text">Уже есть аккаунт?</p></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Войти</b> <span
                             class="caret"></span></a>
                     <ul id="login-dp" class="dropdown-menu">
                         <li>
@@ -110,31 +109,26 @@
                                           accept-charset="UTF-8"
                                           id="login-nav">
                                         <div class="form-groupNumber">
-                                            <label class="sr-only">Login</label>
+                                            <label class="sr-only">Логин</label>
                                             <input type="text" class="form-control" id="login" name="login"
-                                                   placeholder="Login" required>
+                                                   placeholder="Логин" required>
                                         </div>
                                         <div class="form-groupNumber">
-                                            <label class="sr-only">Password</label>
+                                            <label class="sr-only">Пароль</label>
                                             <input type="password" class="form-control" id="password"
                                                    name="password"
-                                                   placeholder="Password" required>
-                                            <div class="help-block text-right"><a href="">Forget the password ?</a>
+                                                   placeholder="Пароль" required>
+                                            <div class="help-block text-right"><a href="">Забыли пароль?</a>
                                             </div>
                                         </div>
                                         <div class="form-groupNumber">
-                                            <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox"> keep me logged-in
-                                            </label>
+                                            <button type="submit" class="btn btn-primary btn-block">Войти</button>
                                         </div>
                                         <input type="hidden" name="cmd" value="login">
                                     </form>
                                 </div>
                                 <div class="bottom text-center">
-                                    New here ? <a href="#"><b>Join Us</b></a>
+                                    New here ? <a href="#"><b>Регистрация</b></a>
                                 </div>
                             </div>
                         </li>
@@ -147,7 +141,7 @@
                           accept-charset="UTF-8"
                           id="logout">
                         <input type="hidden" name="cmd" value="logout">
-                        <input class="btn btn-danger" type="submit" value="Logout">
+                        <input class="btn btn-danger btn-logout" type="submit" value="Выйти">
                     </form>
                 </li>
             </c:if>

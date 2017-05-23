@@ -41,6 +41,15 @@ public class LoginController {
         return model;
     }
 
+    @RequestMapping(value = {"/loginPage"}, method = RequestMethod.GET)
+    public ModelAndView loginPage(HttpServletRequest request) {
+        ModelAndView model = new ModelAndView();
+        HttpSession session = request.getSession();
+        session.setAttribute("currentPage", "formAuth");
+        model.setViewName("formAuth");
+        return model;
+    }
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView login(HttpServletRequest request) {
         ModelAndView model = new ModelAndView();
@@ -51,7 +60,12 @@ public class LoginController {
                 session.setAttribute("currentLogin", user.getLogin());
                 session.setAttribute("currentRank", user.getRank());
             }
-            model.setViewName((String) session.getAttribute("currentPage"));
+            if (!"formAuth".equals((String) session.getAttribute("currentPage"))) {
+                model.setViewName((String) session.getAttribute("currentPage"));
+            } else {
+                session.setAttribute("currentPage", "login");
+                model.setViewName("login");
+            }
         } catch (ServiceException e) {
             //TODO.. Something
         }
