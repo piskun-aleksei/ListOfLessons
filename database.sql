@@ -37,7 +37,7 @@ CREATE TABLE `groups` (
 
 LOCK TABLES `groups` WRITE;
 /*!40000 ALTER TABLE `groups` DISABLE KEYS */;
-INSERT INTO `groups` VALUES ('350504',1),('350504',2),('350503',3),('350504',4);
+INSERT INTO `groups` VALUES ('350504',1),('350504',2),('350503',3),('350504',4),('350504',5),('350504',6),('350504',7),('350504',8),('350504',9),('350504',10),('350504',11),('350504',12),('350504',13),('350504',14),('350504',15),('350504',16),('350504',17),('350504',18),('350504',19),('350504',20),('350504',21),('350504',22);
 /*!40000 ALTER TABLE `groups` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -54,7 +54,7 @@ CREATE TABLE `lesson` (
   `lesson_type` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,7 +92,7 @@ CREATE TABLE `marks` (
 
 LOCK TABLES `marks` WRITE;
 /*!40000 ALTER TABLE `marks` DISABLE KEYS */;
-INSERT INTO `marks` VALUES (1,1,4,NULL),(1,2,5,1),(1,4,10,NULL),(2,1,3,NULL),(2,4,7,NULL);
+INSERT INTO `marks` VALUES (1,1,4,NULL),(1,2,5,1),(1,4,10,NULL),(1,8,7,NULL),(1,9,8,NULL),(1,12,6,NULL),(1,13,1,NULL),(1,15,9,NULL),(1,16,5,NULL),(1,21,8,NULL),(2,1,3,NULL),(2,2,7,NULL),(2,4,7,NULL),(2,7,9,NULL),(2,11,5,NULL),(2,12,7,NULL),(2,13,8,NULL),(2,14,3,NULL),(2,17,6,NULL),(2,18,7,NULL),(2,19,7,NULL),(2,20,7,NULL),(2,21,8,NULL),(2,22,6,NULL),(3,1,8,NULL),(3,2,7,NULL),(3,4,6,NULL),(3,5,7,NULL),(3,6,5,NULL),(3,8,6,NULL),(3,9,7,NULL),(3,10,4,NULL),(3,11,3,NULL),(3,14,5,NULL),(3,17,6,NULL),(4,1,5,NULL),(4,2,4,NULL),(4,5,5,NULL),(4,7,4,NULL),(4,8,5,NULL),(4,9,4,NULL),(4,13,5,NULL),(4,15,7,NULL),(4,17,9,NULL),(4,18,8,NULL),(4,19,7,NULL),(5,2,8,NULL),(5,4,7,NULL),(5,5,5,NULL),(5,6,6,NULL),(5,7,4,NULL),(5,8,3,NULL),(5,9,4,NULL),(5,16,5,NULL),(5,18,6,NULL),(5,19,7,NULL),(6,4,8,NULL),(6,6,6,NULL),(6,7,5,NULL),(6,8,6,NULL),(6,9,7,NULL),(6,10,8,NULL),(6,11,7,NULL),(6,16,6,NULL),(6,17,5,NULL),(6,18,4,NULL),(7,1,5,NULL),(7,2,3,NULL),(7,9,4,NULL),(7,10,7,NULL),(7,13,5,NULL),(7,14,7,NULL),(7,16,6,NULL),(7,18,7,NULL),(7,19,6,NULL);
 /*!40000 ALTER TABLE `marks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -154,7 +154,7 @@ CREATE TABLE `schedule` (
 
 LOCK TABLES `schedule` WRITE;
 /*!40000 ALTER TABLE `schedule` DISABLE KEYS */;
-INSERT INTO `schedule` VALUES (1,'2017-05-03 11:45:00','350504',1,1,1),(2,'2017-06-03 11:45:00','350504',1,2,1);
+INSERT INTO `schedule` VALUES (1,'2017-03-03 11:45:00','350504',1,1,1),(2,'2017-03-05 11:45:00','350504',1,2,1),(3,'2017-03-09 11:45:00','350504',1,2,1),(4,'2017-03-11 11:45:00','350504',1,2,1),(5,'2017-03-14 11:45:00','350504',1,1,1),(6,'2017-03-17 11:45:00','350504',1,2,1),(7,'2017-03-21 11:45:00','350504',1,1,1);
 /*!40000 ALTER TABLE `schedule` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,7 +176,7 @@ CREATE TABLE `student` (
   UNIQUE KEY `student_card_number_UNIQUE` (`student_card_number`),
   UNIQUE KEY `user_id_UNIQUE` (`user_id`),
   CONSTRAINT `fk_student_user_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -185,7 +185,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (1,'0132203',NULL,'Алексей','Пискун'),(2,'0132506',NULL,'Александр','Молотовник'),(3,'0132507',NULL,'Станистав','Маковский'),(4,'0132508',NULL,'Евгений','Шилов'),(5,'0132509',NULL,'Артем','Борбровник'),(8,'0132505',NULL,'Диана','Куприянова');
+INSERT INTO `student` VALUES (1,'0132203',NULL,'Алексей','Пискун'),(2,'0132506',NULL,'Александр','Молотовник'),(3,'0132507',NULL,'Станистав','Маковский'),(4,'0132508',NULL,'Евгений','Шилов'),(5,'0132509',NULL,'Артем','Борбровник'),(6,'0132499',NULL,'Александр','Янушкевич'),(7,'0132500',NULL,'Антон','Качан'),(8,'0132515',NULL,'Диана','Куприянова'),(9,'0132516',NULL,'Андрей','Савич'),(10,'0132517',NULL,'Павел','Евсаев'),(11,'0132518',NULL,'Андрей','Валынко'),(12,'0132519',NULL,'Никита','Давидович'),(13,'0132520',NULL,'Анастасия','Суворова'),(14,'0132521',NULL,'Александр','Сахаров'),(15,'0132522',NULL,'Роман','Черноокий'),(16,'0132523',NULL,'Сергей','Шелег'),(17,'0132524',NULL,'Дмитрий','Басов'),(18,'0132525',NULL,'Артем','Харченко'),(19,'0132526',NULL,'Никита','Павлович'),(20,'0132527',NULL,'Александр','Челочев'),(21,'0132528',NULL,'Андрей','Тарулис'),(22,'0132529',NULL,'Андрей','Савва');
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -256,4 +256,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-20  0:49:33
+-- Dump completed on 2017-05-23 23:27:09
