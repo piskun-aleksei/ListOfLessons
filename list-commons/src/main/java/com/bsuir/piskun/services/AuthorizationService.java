@@ -16,5 +16,5 @@ public interface AuthorizationService extends BasicService <User> {
 
     List<Teacher> selectTeachers() throws ServiceException;
 
-    void insertStudent(Student student) throws ServiceException;
+    void insertStudent(Student student, String group) throws ServiceException;
 }

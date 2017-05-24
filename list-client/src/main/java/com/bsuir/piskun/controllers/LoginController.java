@@ -82,7 +82,9 @@ public class LoginController {
         HttpSession session = request.getSession();
         session.setAttribute("currentLogin", null);
         session.setAttribute("currentRank", 0);
-        if ("forms".equals(session.getAttribute("currentPage"))) {
+        String curPage = (String) session.getAttribute("currentPage");
+        if ("formAuth".equals(curPage) || "formLesson".equals(curPage) || "formRoom".equals(curPage)
+                || "formSchedule".equals(curPage) || "formStudent".equals(curPage)) {
             session.setAttribute("currentPage", "login");
             model.setViewName("login");
         } else {

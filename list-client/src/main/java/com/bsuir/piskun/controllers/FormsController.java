@@ -110,11 +110,12 @@ public class FormsController {
             String cardNumber = DecodeHelper.decode(request.getParameter("studentCard"));
             String name = DecodeHelper.decode(request.getParameter("studentName"));
             String surname = DecodeHelper.decode(request.getParameter("studentSurname"));
+            String group = DecodeHelper.decode(request.getParameter("studentGroup"));
             Student student = new Student();
             student.setStudentCardNumber(cardNumber);
             student.setStudentName(name);
             student.setStudentSurname(surname);
-            authorizationService.insertStudent(student);
+            authorizationService.insertStudent(student, group);
             session.setAttribute("currentPage", "formStudent");
             model.setViewName("formStudent");
         } catch (ServiceException | UnsupportedEncodingException e) {

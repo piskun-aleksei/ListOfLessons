@@ -16,5 +16,5 @@ public interface AuthorizationDao extends BasicDao<User> {
 
     List<Teacher> selectTeachers() throws DaoException;
 
-    void insertStudent(Student student) throws DaoException;
+    void insertStudent(Student student, String group) throws DaoException;
 }

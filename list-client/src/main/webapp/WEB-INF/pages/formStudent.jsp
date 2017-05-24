@@ -26,6 +26,9 @@
         <div class="form-group">
             <input type="text" class="form-control" name="studentSurname" placeholder="Фамилия">
         </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="studentGroup" placeholder="Группа">
+        </div>
 
         <button type="button" onclick="parentNode.submit();" id="formButton" class="btn btn-success button-schedule">
                 Добавить студента

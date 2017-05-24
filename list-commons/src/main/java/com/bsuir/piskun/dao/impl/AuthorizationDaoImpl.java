@@ -27,11 +27,13 @@ public class AuthorizationDaoImpl implements AuthorizationDao {
             " (student_card_number, username, surname) VALUES" +
             " (?,?,?)";
     private static final String SELECT_BY_LOGIN_FROM_USERS = "SELECT id, login, password, rank from users WHERE login = ?";
+    private static final String SELECT_BY_CARD_FROM_STUDENT = "SELECT id FROM student WHERE student_card_number = ?";
     private static final String SELECT_BY_LOGIN_AND_PASS_FROM_USERS = "SELECT id, login, password, rank from users WHERE login = ? AND password = ?";
     private static final String SELECT_ALL_FROM_USERS = "SELECT id, login, password, rank from users";
     private static final String SELECT_ALL_FROM_TEACHER = "SELECT id, position, user_id, username, surname FROM teacher";
     private static final String UPDATE_USERS_BY_LOGIN = "UPDATE users SET (login, password, rank) VALUES" +
             " (?,?,?) WHERE login = ?";
+    private static final String ADD_STUDENT_TO_GROUP = "INSERT INTO groups (group_number, student_id) VALUES (?,?)";
 
     @Autowired
     private DataSource dataSource;
@@ -61,7 +63,7 @@ public class AuthorizationDaoImpl implements AuthorizationDao {
     }
 
     @Override
-    public void insertStudent(Student data) throws DaoException {
+    public void insertStudent(Student data, String group) throws DaoException {
         PreparedStatement preparedStatement = null;
         Connection connection = null;
         try {
@@ -71,6 +73,21 @@ public class AuthorizationDaoImpl implements AuthorizationDao {
             preparedStatement.setString(2, data.getStudentName());
             preparedStatement.setString(3, data.getStudentSurname());
             preparedStatement.executeUpdate();
+            if (preparedStatement != null && !preparedStatement.isClosed()) {
+                preparedStatement.close();
+            }
+            preparedStatement = connection.prepareStatement(SELECT_BY_CARD_FROM_STUDENT);
+            preparedStatement.setString(1, data.getStudentCardNumber());
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                if (preparedStatement != null && !preparedStatement.isClosed()) {
+                    preparedStatement.close();
+                }
+                preparedStatement = connection.prepareStatement(ADD_STUDENT_TO_GROUP);
+                preparedStatement.setInt(1, rs.getInt(RowValues.ID));
+                preparedStatement.setString(2, group);
+                preparedStatement.executeUpdate();
+            }
         } catch (SQLException e) {
             throw new DaoException("SQl OR HASH CREATION FAILED", e);
         } finally {

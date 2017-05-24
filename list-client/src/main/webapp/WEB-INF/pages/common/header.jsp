@@ -128,7 +128,7 @@
                                     </form>
                                 </div>
                                 <div class="bottom text-center">
-                                    New here ? <a href="#"><b>Регистрация</b></a>
+                                    Впервые на сайте? <a href="#"><b>Регистрация</b></a>
                                 </div>
                             </div>
                         </li>

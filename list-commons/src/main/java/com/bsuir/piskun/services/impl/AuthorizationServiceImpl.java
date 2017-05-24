@@ -66,9 +66,9 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
     @Override
     @Transactional(rollbackFor = DaoException.class)
-    public void insertStudent(Student data) throws ServiceException {
+    public void insertStudent(Student data, String group) throws ServiceException {
         try {
-            authorizationDao.insertStudent(data);
+            authorizationDao.insertStudent(data, group);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
