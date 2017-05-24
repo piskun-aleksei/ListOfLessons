@@ -5,6 +5,8 @@ import com.bsuir.piskun.beans.User;
 import com.bsuir.piskun.exceptions.ServiceException;
 import com.bsuir.piskun.services.AuthorizationService;
 import com.bsuir.piskun.services.LessonService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,8 @@ import java.util.List;
 
 @Controller
 public class LoginController {
+
+    Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @Autowired
     private AuthorizationService authorizationService;
@@ -32,7 +36,7 @@ public class LoginController {
         try {
             lessonList = lessonService.select();
         } catch (ServiceException e) {
-            //TODO log this
+            logger.error("Service exception", e);
         }
         session.setAttribute("lessonList", lessonList);
         session.setAttribute("currentPage", "login");
@@ -67,7 +71,7 @@ public class LoginController {
                 model.setViewName("login");
             }
         } catch (ServiceException e) {
-            //TODO.. Something
+            logger.error("Service exceprion", e);
         }
         return model;
     }

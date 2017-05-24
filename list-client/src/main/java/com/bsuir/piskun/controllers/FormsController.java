@@ -10,6 +10,8 @@ import com.bsuir.piskun.services.AuthorizationService;
 import com.bsuir.piskun.services.GroupService;
 import com.bsuir.piskun.services.LessonService;
 import com.bsuir.piskun.services.RoomService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +26,8 @@ import java.util.List;
 
 @Controller
 public class FormsController {
+
+    Logger logger = LoggerFactory.getLogger(FormsController.class);
 
     @Autowired
     private AuthorizationService authorizationService;
@@ -51,22 +55,18 @@ public class FormsController {
     public ModelAndView addFormsLesson(HttpServletRequest request) {
         ModelAndView model = new ModelAndView();
         try {
-
             HttpSession session = request.getSession();
             String lessonName = DecodeHelper.decode(request.getParameter("lessonName"));
             String lessonType = request.getParameter("lessonType");
             Lesson lesson = new Lesson();
             lesson.setLessonName(lessonName);
             lesson.setLessonType(LessonType.getLessonTypeByValue(lessonType));
-
             lessonService.insert(lesson);
-
             session.setAttribute("currentPage", "formLesson");
             model.setViewName("formLesson");
         } catch (ServiceException | UnsupportedEncodingException e) {
-            //TODO log this
+            logger.error("Exception", e);
         }
-
         return model;
     }
 
@@ -83,12 +83,11 @@ public class FormsController {
             teacherList = authorizationService.selectTeachers();
             roomList = roomService.select();
         } catch (ServiceException e) {
-            //TODO log this
+            logger.error("Service exception", e);
         }
         session.setAttribute("lessonList", lessonList);
         session.setAttribute("teacherList", teacherList);
         session.setAttribute("roomList", roomList);
-
         session.setAttribute("currentPage", "formSchedule");
         model.setViewName("formSchedule");
         return model;
@@ -98,7 +97,6 @@ public class FormsController {
     public ModelAndView getFormsStudent(HttpServletRequest request) {
         ModelAndView model = new ModelAndView();
         HttpSession session = request.getSession();
-
         session.setAttribute("currentPage", "formStudent");
         model.setViewName("formStudent");
         return model;
@@ -108,7 +106,6 @@ public class FormsController {
     public ModelAndView addFormsStudent(HttpServletRequest request) {
         ModelAndView model = new ModelAndView();
         try {
-
             HttpSession session = request.getSession();
             String cardNumber = DecodeHelper.decode(request.getParameter("studentCard"));
             String name = DecodeHelper.decode(request.getParameter("studentName"));
@@ -117,13 +114,11 @@ public class FormsController {
             student.setStudentCardNumber(cardNumber);
             student.setStudentName(name);
             student.setStudentSurname(surname);
-
             authorizationService.insertStudent(student);
-
             session.setAttribute("currentPage", "formStudent");
             model.setViewName("formStudent");
         } catch (ServiceException | UnsupportedEncodingException e) {
-            //TODO log this
+            logger.error("Exception", e);
         }
 
         return model;
@@ -133,7 +128,6 @@ public class FormsController {
     public ModelAndView getFormsRoom(HttpServletRequest request) {
         ModelAndView model = new ModelAndView();
         HttpSession session = request.getSession();
-
         session.setAttribute("currentPage", "formRoom");
         model.setViewName("formRoom");
         return model;
@@ -148,15 +142,12 @@ public class FormsController {
             String roomNumber = DecodeHelper.decode(request.getParameter("roomNumber"));
             Room room = new Room();
             room.setRoomNumber(roomNumber);
-
             roomService.insert(room);
-
             session.setAttribute("currentPage", "formRoom");
             model.setViewName("formRoom");
         } catch (ServiceException | UnsupportedEncodingException e) {
-            //TODO log this
+            logger.error("Exception", e);
         }
-
         return model;
     }
 
