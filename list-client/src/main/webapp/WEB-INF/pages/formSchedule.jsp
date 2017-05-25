@@ -23,13 +23,15 @@
         <div class="form-group">
             <input type="text" class="form-control" name="scheduleGroup" placeholder="Номер группы">
         </div>
-        <div class="form-group">
-            <select class="form-control" name="scheduleTeacher">
-                <c:forEach var="teacher" items="${teacherList}" varStatus="status">
-                    <option value="${teacher.teacherId}">${teacher.teacherName} ${teacher.teacherSurname}</option>
-                </c:forEach>
-            </select>
-        </div>
+        <c:if test="${currentRank == 5}">
+            <div class="form-group">
+                <select class="form-control" name="scheduleTeacher">
+                    <c:forEach var="teacher" items="${teacherList}" varStatus="status">
+                        <option value="${teacher.teacherId}">${teacher.teacherName} ${teacher.teacherSurname}</option>
+                    </c:forEach>
+                </select>
+            </div>
+        </c:if>
         <div class="form-group">
             <select class="form-control" name="scheduleRoom">
                 <c:forEach var="room" items="${roomList}" varStatus="status">

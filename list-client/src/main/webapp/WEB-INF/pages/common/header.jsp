@@ -66,12 +66,16 @@
                                 <input type="hidden" name="cmd" value="formsLesson"/>
                             </form>
                         </li>
+                    </c:if>
+                    <c:if test="${currentRank > 2}">
                         <li>
                             <form class="form" role="form" method="get" action="formsSchedule">
                                 <a href="javascript:;" onclick="parentNode.submit();">Добавить занятие</a>
                                 <input type="hidden" name="cmd" value="formsSchedule"/>
                             </form>
                         </li>
+                    </c:if>
+                    <c:if test="${currentRank == 5}">
                         <li>
                             <form class="form" role="form" method="get" action="formsStudent">
                                 <a href="javascript:;" onclick="parentNode.submit();">Добавить студента</a>
