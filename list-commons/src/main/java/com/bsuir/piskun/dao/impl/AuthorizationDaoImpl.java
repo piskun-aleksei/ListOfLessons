@@ -8,6 +8,8 @@ import com.bsuir.piskun.dao.AuthorizationDao;
 import com.bsuir.piskun.exceptions.DaoException;
 import com.bsuir.piskun.exceptions.HashCreationException;
 import com.bsuir.piskun.util.HashCreator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.sql.DataSource;
@@ -19,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AuthorizationDaoImpl implements AuthorizationDao {
+
+    private Logger logger = LoggerFactory.getLogger(AuthorizationDaoImpl.class);
 
     private static final String INSERT_INTO_USERS = "INSERT INTO users" +
             " (login, password, rank) VALUES" +
@@ -57,7 +61,7 @@ public class AuthorizationDaoImpl implements AuthorizationDao {
                     preparedStatement.close();
                 }
             } catch (SQLException e) {
-                //TODO.. Log this
+                logger.error("SQL Exception", e);
             }
         }
     }
@@ -96,7 +100,7 @@ public class AuthorizationDaoImpl implements AuthorizationDao {
                     preparedStatement.close();
                 }
             } catch (SQLException e) {
-                //TODO.. Log this
+                logger.error("SQL Exception", e);
             }
         }
     }
@@ -122,7 +126,7 @@ public class AuthorizationDaoImpl implements AuthorizationDao {
                     preparedStatement.close();
                 }
             } catch (SQLException e) {
-                //TODO.. Log this
+                logger.error("SQL Exception", e);
             }
         }
         return user;
@@ -150,7 +154,7 @@ public class AuthorizationDaoImpl implements AuthorizationDao {
                     preparedStatement.close();
                 }
             } catch (SQLException e) {
-                //TODO.. Log this
+                logger.error("SQL Exception", e);
             }
         }
         return user;
@@ -176,7 +180,7 @@ public class AuthorizationDaoImpl implements AuthorizationDao {
                     preparedStatement.close();
                 }
             } catch (SQLException e) {
-                //TODO.. Log this
+                logger.error("SQL Exception", e);
             }
         }
         return users;
@@ -202,7 +206,7 @@ public class AuthorizationDaoImpl implements AuthorizationDao {
                     preparedStatement.close();
                 }
             } catch (SQLException e) {
-                //TODO.. Log this
+                logger.error("SQL Exception", e);
             }
         }
         return teachers;
@@ -233,7 +237,7 @@ public class AuthorizationDaoImpl implements AuthorizationDao {
                     preparedStatement.close();
                 }
             } catch (SQLException e) {
-                //TODO.. Log this
+                logger.error("SQL Exception", e);
             }
         }
     }
