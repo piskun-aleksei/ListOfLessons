@@ -5,6 +5,8 @@ import com.bsuir.piskun.constants.LessonType;
 import com.bsuir.piskun.constants.RowValues;
 import com.bsuir.piskun.dao.ScheduleDao;
 import com.bsuir.piskun.exceptions.DaoException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.sql.DataSource;
@@ -16,6 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 public class ScheduleDaoImpl implements ScheduleDao {
+
+    private Logger logger = LoggerFactory.getLogger(ScheduleDaoImpl.class);
 
     private static final String SELECT_BY_GROUP_NUMBER_FROM_GROUP =
             "SELECT schedule_id, date_time, group_number, teacher.id as teacher_id, teacher.position, teacher.username, teacher.surname," +
@@ -78,7 +82,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
                     preparedStatement.close();
                 }
             } catch (SQLException e) {
-                //TODO.. Log this
+                logger.error("SQL Exception", e);
             }
         }
         return groupSchedule;
@@ -121,15 +125,14 @@ public class ScheduleDaoImpl implements ScheduleDao {
                     StudentMarks marks = studentsMarks.get(nestedRs.getInt(RowValues.STUDENT_ID));
                     marks.addMark(nestedRs.getInt(RowValues.MARK), nestedRs.getBoolean(RowValues.ABSENT));
                 }
-                for (Map.Entry<Integer, StudentMarks> entry : studentsMarks.entrySet())
-                {
+                for (Map.Entry<Integer, StudentMarks> entry : studentsMarks.entrySet()) {
                     StudentMarks value = entry.getValue();
 
                     if (value.getMarks().size() == i || value.getAbsents().size() == i) {
                         value.addMark(null, false);
                     }
                 }
-                i ++;
+                i++;
             }
             for (Integer key : studentsMarks.keySet()) {
                 groupSchedule.addStudentMarks(studentsMarks.get(key));
@@ -143,7 +146,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
                     preparedStatement.close();
                 }
             } catch (SQLException e) {
-                //TODO.. Log this
+                logger.error("SQL Exception", e);
             }
         }
         return groupSchedule;
@@ -173,7 +176,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
                     preparedStatement.close();
                 }
             } catch (SQLException e) {
-                //TODO.. Log this
+                logger.error("SQL Exception", e);
             }
         }
     }
@@ -199,7 +202,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
                     preparedStatement.close();
                 }
             } catch (SQLException e) {
-                //TODO.. Log this
+                logger.error("SQL Exception", e);
             }
         }
     }
