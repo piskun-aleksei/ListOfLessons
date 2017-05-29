@@ -30,6 +30,7 @@ public class ScheduleController {
         } catch (ServiceException e) {
             //TODO log this...
         }
+        session.setAttribute("scheduleTeacherId", groupSchedule.getCalendarLessons().get(0).getTeacher().getTeacherId());
         session.setAttribute("lessons", groupSchedule.getCalendarLessons());
         session.setAttribute("students", groupSchedule.getStudentMarks());
         session.setAttribute("currentPage", "schedule");

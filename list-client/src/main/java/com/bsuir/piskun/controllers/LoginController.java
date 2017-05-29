@@ -1,6 +1,7 @@
 package com.bsuir.piskun.controllers;
 
 import com.bsuir.piskun.beans.Lesson;
+import com.bsuir.piskun.beans.Teacher;
 import com.bsuir.piskun.beans.User;
 import com.bsuir.piskun.exceptions.ServiceException;
 import com.bsuir.piskun.services.AuthorizationService;
@@ -62,7 +63,14 @@ public class LoginController {
             User user = authorizationService.select(request.getParameter("login"), request.getParameter("password"));
             if (user != null) {
                 session.setAttribute("currentLogin", user.getLogin());
-                session.setAttribute("currentRank", user.getRank());
+                int rank = user.getRank();
+                session.setAttribute("currentRank", rank);
+                if (rank == 3) {
+                    Teacher teacher = authorizationService.select(user.getUserId());
+                    if (teacher != null) {
+                        session.setAttribute("teacherId", teacher.getTeacherId());
+                    }
+                }
             }
             if (!"formAuth".equals((String) session.getAttribute("currentPage"))) {
                 model.setViewName((String) session.getAttribute("currentPage"));

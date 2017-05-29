@@ -27,6 +27,15 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     }
 
     @Override
+    public Teacher select(int id) throws ServiceException {
+        try {
+            return authorizationDao.select(id);
+        } catch (DaoException e) {
+            throw new ServiceException (e);
+        }
+    }
+
+    @Override
     public User select(String login, String password) throws ServiceException {
         try {
             return authorizationDao.select(login, password);

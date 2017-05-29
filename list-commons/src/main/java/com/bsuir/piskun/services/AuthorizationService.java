@@ -10,6 +10,8 @@ import java.util.List;
 public interface AuthorizationService extends BasicService <User> {
     User select(String login) throws ServiceException;
 
+    Teacher select(int id) throws ServiceException;
+
     User select(String login, String password) throws ServiceException;
 
     List<User> select() throws ServiceException;

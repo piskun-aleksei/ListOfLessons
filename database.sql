@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: list_schema
+-- Host: localhost    Database: list_schema
 -- ------------------------------------------------------
--- Server version	5.7.17-log
+-- Server version	5.7.18-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -154,7 +154,7 @@ CREATE TABLE `schedule` (
 
 LOCK TABLES `schedule` WRITE;
 /*!40000 ALTER TABLE `schedule` DISABLE KEYS */;
-INSERT INTO `schedule` VALUES (1,'2017-03-03 11:45:00','350504',1,1,1),(2,'2017-03-05 11:45:00','350504',1,2,1),(3,'2017-03-09 11:45:00','350504',1,2,1),(4,'2017-03-11 11:45:00','350504',1,2,1),(5,'2017-03-14 11:45:00','350504',1,1,1),(6,'2017-03-17 11:45:00','350504',1,2,1),(7,'2017-03-21 11:45:00','350504',1,1,1);
+INSERT INTO `schedule` VALUES (1,'2017-03-03 11:45:00','350504',3,1,1),(2,'2017-03-05 11:45:00','350504',3,2,1),(3,'2017-03-09 11:45:00','350504',3,2,1),(4,'2017-03-11 11:45:00','350504',3,2,1),(5,'2017-03-14 11:45:00','350504',3,1,1),(6,'2017-03-17 11:45:00','350504',3,2,1),(7,'2017-03-21 11:45:00','350504',3,1,1);
 /*!40000 ALTER TABLE `schedule` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -206,7 +206,7 @@ CREATE TABLE `teacher` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `user_id_UNIQUE` (`user_id`),
   CONSTRAINT `fk_teacher_user_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -215,7 +215,7 @@ CREATE TABLE `teacher` (
 
 LOCK TABLES `teacher` WRITE;
 /*!40000 ALTER TABLE `teacher` DISABLE KEYS */;
-INSERT INTO `teacher` VALUES (1,'Аспирант',NULL,'Евгений','Кухарчук'),(2,'Аспирант',NULL,'Иван','Глецевич');
+INSERT INTO `teacher` VALUES (1,'Аспирант',NULL,'Евгений','Кухарчук'),(2,'Аспирант',NULL,'Иван','Глецевич'),(3,'Доцент',3,'Пискунов','Алекс');
 /*!40000 ALTER TABLE `teacher` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -234,7 +234,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `iduser_UNIQUE` (`id`),
   UNIQUE KEY `login_UNIQUE` (`login`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -243,7 +243,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin','21232f297a57a5a743894a0e4a801fc3',5),(2,'alex','a029d0df84eb5549c641e04a9ef389e5',2),(3,'teacher','a029d0df84eb5549c641e04a9ef389e5',3);
+INSERT INTO `users` VALUES (1,'admin','21232f297a57a5a743894a0e4a801fc3',5),(2,'alex','a029d0df84eb5549c641e04a9ef389e5',2),(3,'teacher','a029d0df84eb5549c641e04a9ef389e5',3),(4,'newTeach','a029d0df84eb5549c641e04a9ef389e5',3);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -256,4 +256,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-23 23:27:09
+-- Dump completed on 2017-05-29 17:38:30

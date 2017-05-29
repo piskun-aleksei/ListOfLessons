@@ -10,6 +10,8 @@ import java.util.List;
 public interface AuthorizationDao extends BasicDao<User> {
     User select(String login) throws DaoException;
 
+    Teacher select(int id) throws DaoException;
+
     User select(String login, String password) throws DaoException;
 
     List<User> select() throws DaoException;

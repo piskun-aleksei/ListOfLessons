@@ -31,7 +31,7 @@
                 <c:forEach var="mark" items="${student.marks}" varStatus="status">
                     <td>
                         <span class="mark-span"><c:out value="${mark}"/></span>
-                        <c:if test="${currentRank == 3}">
+                        <c:if test="${currentRank == 3 && teacherId != null && teacherId == scheduleTeacherId}">
                             <button class="btn btn-primary btn-xs mark-button" data-title="Edit" data-toggle="modal"
                                     data-target="#edit">
                                 <span class="glyphicon glyphicon-pencil"></span>
@@ -43,6 +43,7 @@
         </c:forEach>
         </tbody>
     </table>
+    <div><c:out value="${scheduleTeacherId}"/> and <c:out value="${teacherId}"/></div>
 </div>
 </body>
 </html>

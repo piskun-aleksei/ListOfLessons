@@ -30,7 +30,8 @@ public class AuthorizationDaoImpl implements AuthorizationDao {
     private static final String INSERT_INTO_STUDENT = "INSERT INTO student" +
             " (student_card_number, username, surname) VALUES" +
             " (?,?,?)";
-    private static final String SELECT_BY_LOGIN_FROM_USERS = "SELECT id, login, password, rank from users WHERE login = ?";
+    private static final String SELECT_BY_LOGIN_FROM_USERS = "SELECT id, login, password, rank FROM users WHERE login = ?";
+    private static final String SELECT_BY_ID_FROM_TEACHER = "SELECT id, position, user_id, username, surname FROM teacher WHERE user_id = ?";
     private static final String SELECT_BY_CARD_FROM_STUDENT = "SELECT id FROM student WHERE student_card_number = ?";
     private static final String SELECT_BY_LOGIN_AND_PASS_FROM_USERS = "SELECT id, login, password, rank from users WHERE login = ? AND password = ?";
     private static final String SELECT_ALL_FROM_USERS = "SELECT id, login, password, rank from users";
@@ -130,6 +131,33 @@ public class AuthorizationDaoImpl implements AuthorizationDao {
             }
         }
         return user;
+    }
+
+    @Override
+    public Teacher select(int id) throws DaoException {
+        PreparedStatement preparedStatement = null;
+        Teacher teacher = null;
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            preparedStatement = connection.prepareStatement(SELECT_BY_ID_FROM_TEACHER);
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                teacher = setTeacher(new Teacher(), rs);
+            }
+        } catch (SQLException e) {
+            throw new DaoException("SQL FAILED", e);
+        } finally {
+            try {
+                if (preparedStatement != null && !preparedStatement.isClosed()) {
+                    preparedStatement.close();
+                }
+            } catch (SQLException e) {
+                logger.error("SQL Exception", e);
+            }
+        }
+        return teacher;
     }
 
     @Override
