@@ -289,7 +289,7 @@ public class AuthorizationDaoImpl implements AuthorizationDao {
     }
 
     private Teacher setTeacher(Teacher teacher, ResultSet resultSet) throws SQLException {
-        teacher.setUserId(resultSet.getInt(RowValues.ID));
+        teacher.setTeacherId(resultSet.getInt(RowValues.ID));
         teacher.setPosition(resultSet.getString(RowValues.POSITION));
         teacher.setUserId(resultSet.getInt(RowValues.USER_ID));
         teacher.setTeacherName(resultSet.getString(RowValues.USERNAME));

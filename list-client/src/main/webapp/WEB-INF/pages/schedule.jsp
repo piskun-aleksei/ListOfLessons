@@ -43,7 +43,6 @@
         </c:forEach>
         </tbody>
     </table>
-    <div><c:out value="${scheduleTeacherId}"/> and <c:out value="${teacherId}"/></div>
 </div>
 </body>
 </html>
