@@ -8,6 +8,8 @@ public interface ScheduleService extends BasicService<GroupSchedule> {
 
     void addLesson(String dateTime, Group group, Teacher teacher, Lesson lesson, Room room) throws ServiceException;
 
+    void setMark(Integer mark, Integer studentId, Integer scheduleId) throws ServiceException;
+
     void removeLesson(Group group, String dateTime) throws ServiceException;
 
     GroupSchedule select(String groupNumber, int lessonId) throws ServiceException;

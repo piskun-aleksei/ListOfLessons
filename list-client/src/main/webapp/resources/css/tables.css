@@ -53,3 +53,7 @@ iframe
 table {
     background: #ffffff !important;
 }
+
+.modal-backdrop {
+    z-index: 5 !important;
+}

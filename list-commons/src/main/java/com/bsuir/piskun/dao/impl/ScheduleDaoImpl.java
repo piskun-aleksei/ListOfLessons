@@ -42,6 +42,9 @@ public class ScheduleDaoImpl implements ScheduleDao {
     private static final String GET_STUDENT_IDS_BY_GROUP = "SELECT student_id, username, surname FROM groups INNER JOIN " +
             "student ON groups.student_id = student.id WHERE group_number = ? ORDER BY concat(username,surname)";
     private static final String GET_STUDENTS_MARK = "SELECT student_id, mark, absent FROM marks WHERE schedule_id = ?";
+    private static final String GET_STUDENT_MARK = "SELECT mark, absent FROM marks WHERE schedule_id = ? AND student_id = ?";
+    private static final String SET_STUDENT_MARK = "UPDATE marks SET mark = ? WHERE schedule_id = ? AND student_id = ?";
+    private static final String ADD_STUDENT_MARK = "INSERT INTO marks(schedule_id, student_id, mark) VALUES (?,?,?)";
 
     @Autowired
     private DataSource dataSource;
@@ -119,17 +122,19 @@ public class ScheduleDaoImpl implements ScheduleDao {
             while (rs.next()) {
                 groupSchedule = addInfoToSchedule(groupSchedule, rs);
                 nestedStatement = connection.prepareStatement(GET_STUDENTS_MARK);
-                nestedStatement.setInt(1, groupSchedule.getCalendarLessons().get(i).getScheduleId());
+                Integer scheduleId = groupSchedule.getCalendarLessons().get(i).getScheduleId();
+                nestedStatement.setInt(1,scheduleId);
                 ResultSet nestedRs = nestedStatement.executeQuery();
+
                 while (nestedRs.next()) {
                     StudentMarks marks = studentsMarks.get(nestedRs.getInt(RowValues.STUDENT_ID));
-                    marks.addMark(nestedRs.getInt(RowValues.MARK), nestedRs.getBoolean(RowValues.ABSENT));
+                    marks.addMark(nestedRs.getInt(RowValues.MARK), nestedRs.getBoolean(RowValues.ABSENT), scheduleId);
                 }
                 for (Map.Entry<Integer, StudentMarks> entry : studentsMarks.entrySet()) {
                     StudentMarks value = entry.getValue();
 
                     if (value.getMarks().size() == i || value.getAbsents().size() == i) {
-                        value.addMark(null, false);
+                        value.addMark(null, false, scheduleId);
                     }
                 }
                 i++;
@@ -169,6 +174,49 @@ public class ScheduleDaoImpl implements ScheduleDao {
             preparedStatement.setInt(5, lesson.getLessonId());
             preparedStatement.executeUpdate();
         } catch (SQLException | ParseException e) {
+            throw new DaoException("SQL OR PARSE FAILED", e);
+        } finally {
+            try {
+                if (preparedStatement != null && !preparedStatement.isClosed()) {
+                    preparedStatement.close();
+                }
+            } catch (SQLException e) {
+                logger.error("SQL Exception", e);
+            }
+        }
+    }
+
+    @Override
+    public void setMark(Integer mark, Integer studentId, Integer scheduleId) throws DaoException {
+        PreparedStatement preparedStatement = null;
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+            preparedStatement = connection.prepareStatement(GET_STUDENT_MARK);
+            preparedStatement.setInt(1, scheduleId);
+            preparedStatement.setInt(2, studentId);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (!rs.next()) {
+                if (preparedStatement != null && !preparedStatement.isClosed()) {
+                    preparedStatement.close();
+                }
+                preparedStatement = connection.prepareStatement(ADD_STUDENT_MARK);
+                preparedStatement.setInt(1, scheduleId);
+                preparedStatement.setInt(2, studentId);
+                preparedStatement.setInt(3, mark);
+                preparedStatement.executeUpdate();
+            } else {
+                if (preparedStatement != null && !preparedStatement.isClosed()) {
+                    preparedStatement.close();
+                }
+                preparedStatement = connection.prepareStatement(SET_STUDENT_MARK);
+                preparedStatement.setInt(1, mark);
+                preparedStatement.setInt(2, scheduleId);
+                preparedStatement.setInt(3, studentId);
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException e) {
             throw new DaoException("SQL OR PARSE FAILED", e);
         } finally {
             try {

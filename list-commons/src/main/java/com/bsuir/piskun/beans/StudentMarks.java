@@ -1,7 +1,9 @@
 package com.bsuir.piskun.beans;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class StudentMarks {
 
@@ -9,7 +11,7 @@ public class StudentMarks {
     private int lessonId;
     private String studentName;
     private String studentSurname;
-    private List<Integer> marks = new ArrayList<>();
+    private Map<Integer, Integer> marks = new LinkedHashMap<>();
     private List<Boolean> absents =  new ArrayList<>();
 
     public int getStudentId() {
@@ -28,25 +30,12 @@ public class StudentMarks {
         this.lessonId = lessonId;
     }
 
-    public List<Integer> getMarks() {
-        return marks;
-    }
-
-    public void setMarks(List<Integer> marks) {
-        this.marks = marks;
-    }
-
     public List<Boolean> getAbsents() {
         return absents;
     }
 
     public void setAbsents(List<Boolean> absents) {
         this.absents = absents;
-    }
-
-    public void addMark(Integer mark, boolean absent) {
-        marks.add(mark);
-        absents.add(absent);
     }
 
     public String getStudentName() {
@@ -65,21 +54,46 @@ public class StudentMarks {
         this.studentSurname = studentSurname;
     }
 
+    public Map<Integer, Integer> getMarks() {
+        return marks;
+    }
+
+    public void setMarks(Map<Integer, Integer> marks) {
+        this.marks = marks;
+    }
+
+    public void addMark(Integer mark, boolean absent, Integer scheduleId) {
+        marks.put(scheduleId, mark);
+        absents.add(absent);
+    }
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         StudentMarks that = (StudentMarks) o;
 
-        if (studentId != that.studentId) return false;
-        if (lessonId != that.lessonId) return false;
-        if (studentName != null ? !studentName.equals(that.studentName) : that.studentName != null) return false;
-        if (studentSurname != null ? !studentSurname.equals(that.studentSurname) : that.studentSurname != null)
+        if (studentId != that.studentId) {
             return false;
-        if (marks != null ? !marks.equals(that.marks) : that.marks != null) return false;
+        }
+        if (lessonId != that.lessonId) {
+            return false;
+        }
+        if (studentName != null ? !studentName.equals(that.studentName) : that.studentName != null) {
+            return false;
+        }
+        if (studentSurname != null ? !studentSurname.equals(that.studentSurname) : that.studentSurname != null) {
+            return false;
+        }
+        if (marks != null ? !marks.equals(that.marks) : that.marks != null) {
+            return false;
+        }
         return absents != null ? absents.equals(that.absents) : that.absents == null;
-
     }
 
     @Override

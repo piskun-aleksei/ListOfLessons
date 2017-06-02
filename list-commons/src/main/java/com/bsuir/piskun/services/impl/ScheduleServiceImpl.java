@@ -90,6 +90,15 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
+    public void setMark(Integer mark, Integer studentId, Integer scheduleId) throws ServiceException {
+        try {
+            scheduleDao.setMark(mark, studentId, scheduleId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
     public void removeLesson(Group group, String dateTime) throws ServiceException {
         try {
             scheduleDao.removeLesson(group, dateTime);

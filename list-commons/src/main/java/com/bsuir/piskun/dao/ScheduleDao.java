@@ -15,6 +15,8 @@ public interface ScheduleDao extends BasicDao<GroupSchedule> {
 
     void addLesson(String dateTime, Group group, Teacher teacher, Lesson lesson, Room room) throws DaoException;
 
+    void setMark(Integer mark, Integer studentId, Integer scheduleId) throws DaoException;
+
     void removeLesson(Group group, String dateTime) throws DaoException;
 
     GroupSchedule select(String groupNumber, int lessonId) throws DaoException;
