@@ -27,12 +27,14 @@
         <tbody>
         <c:forEach var="student" items="${students}" varStatus="status">
             <tr>
-                <td value="${student.studentId}"><c:out value="${student.studentName}"/> <c:out value="${student.studentSurname}"/></td>
+                <td value="${student.studentId}"><c:out value="${student.studentName}"/> <c:out
+                        value="${student.studentSurname}"/></td>
                 <c:forEach var="mark" items="${student.marks}" varStatus="status">
                     <td value="${mark.key}">
                         <span class="mark-span"><c:out value="${mark.value}"/></span>
                         <c:if test="${currentRank == 3 && teacherId != null && teacherId == scheduleTeacherId}">
-                            <button type="button" class="btn btn-primary btn-xs mark-button" data-title="Edit" data-toggle="modal"
+                            <button type="button" class="btn btn-primary btn-xs mark-button" data-title="Edit"
+                                    data-toggle="modal" data-backdrop="static" data-keyboard="false"
                                     data-target="#myModal" role="dialog" onclick="getValues(this);">
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </button>
@@ -46,32 +48,34 @@
 </div>
 
 
-    <!-- Modal -->
-    <div id="myModal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
 
-        <!-- Modal content-->
+        <!-- Modal content -->
         <div class="modal-content">
-        <form class="form-horizontal custom-form" method="post" action="changeMark">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Изменить оценку</h4>
-          </div>
-          <div class="modal-body">
-            <input type="text" id="studentMark" class="form-control" name="studentMark" placeholder="Оценка">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" id="addMarkButton" onclick="parentNode.parentNode.submit();">Сохранить</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-          </div>
+            <form class="form-horizontal custom-form" method="post" action="changeMark">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Изменить оценку</h4>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="studentMark" class="form-control" name="studentMark" placeholder="Оценка">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="addMarkButton"
+                            onclick="parentNode.parentNode.submit();">Сохранить
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                </div>
 
-            <input type="hidden" id="studentId" name="studentId"/>
-            <input type="hidden" id="scheduleId" name="scheduleId"/>
-            <input type="hidden" name="cmd" value="changeMark"/>
-          </form>
+                <input type="hidden" id="studentId" name="studentId"/>
+                <input type="hidden" id="scheduleId" name="scheduleId"/>
+                <input type="hidden" name="cmd" value="changeMark"/>
+            </form>
         </div>
 
-      </div>
     </div>
+</div>
+
 </body>
 </html>
