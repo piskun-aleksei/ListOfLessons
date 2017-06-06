@@ -1,8 +1,5 @@
-$(document).ready(function () {
-
-    var $j = jQuery.noConflict();
-
-    $j('#datePicker').datepicker({
-        locale: 'ru'
-    });
-});
+$('.datepicker').off('focus').datepicker().click(
+    function () {
+        $(this).datepicker('show');
+    }
+);

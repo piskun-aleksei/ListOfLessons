@@ -19,12 +19,15 @@
 
     <form class="form-horizontal custom-form" action="addSchedule">
         <div class="form-group">
-            <div class="input-group date" id="datePicker" data-provide="datepicker">
-                <input name="scheduleDate" type="text" class="form-control">
-                <div class="input-group-addon">
-                    <span class="glyphicon glyphicon-th"></span>
-                </div>
+            <!--
+
+            <div class="input-group date datepicker">
+                <input name="scheduleDate" type="text" class="form-control" />
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
             </div>
+
+             -->
+            <input type="text" class="form-control" name="scheduleDate" placeholder="Дата">
         </div>
         <div class="form-group">
             <input type="text" class="form-control" name="scheduleGroup" placeholder="Номер группы">
