@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: list_schema
+-- Host: 127.0.0.1    Database: list_schema
 -- ------------------------------------------------------
--- Server version	5.7.18-log
+-- Server version	5.7.17-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -92,7 +92,7 @@ CREATE TABLE `marks` (
 
 LOCK TABLES `marks` WRITE;
 /*!40000 ALTER TABLE `marks` DISABLE KEYS */;
-INSERT INTO `marks` VALUES (1,1,4,NULL),(1,2,5,1),(1,4,10,NULL),(1,8,7,NULL),(1,9,8,NULL),(1,12,6,NULL),(1,13,1,NULL),(1,15,9,NULL),(1,16,5,NULL),(1,21,8,NULL),(2,1,3,NULL),(2,2,7,NULL),(2,4,7,NULL),(2,7,9,NULL),(2,11,5,NULL),(2,12,7,NULL),(2,13,8,NULL),(2,14,3,NULL),(2,17,6,NULL),(2,18,7,NULL),(2,19,7,NULL),(2,20,7,NULL),(2,21,8,NULL),(2,22,6,NULL),(3,1,8,NULL),(3,2,7,NULL),(3,4,6,NULL),(3,5,7,NULL),(3,6,5,NULL),(3,8,6,NULL),(3,9,7,NULL),(3,10,4,NULL),(3,11,3,NULL),(3,14,5,NULL),(3,17,6,NULL),(4,1,5,NULL),(4,2,4,NULL),(4,5,5,NULL),(4,7,4,NULL),(4,8,5,NULL),(4,9,4,NULL),(4,13,5,NULL),(4,15,7,NULL),(4,17,9,NULL),(4,18,8,NULL),(4,19,7,NULL),(5,2,5,NULL),(5,4,7,NULL),(5,5,5,NULL),(5,6,6,NULL),(5,7,4,NULL),(5,8,3,NULL),(5,9,4,NULL),(5,16,5,NULL),(5,18,6,NULL),(5,19,7,NULL),(6,2,10,NULL),(6,4,8,NULL),(6,6,6,NULL),(6,7,5,NULL),(6,8,6,NULL),(6,9,7,NULL),(6,10,8,NULL),(6,11,7,NULL),(6,16,6,NULL),(6,17,5,NULL),(6,18,4,NULL),(7,1,5,NULL),(7,2,3,NULL),(7,9,4,NULL),(7,10,7,NULL),(7,13,5,NULL),(7,14,7,NULL),(7,16,6,NULL),(7,18,7,NULL),(7,19,6,NULL);
+INSERT INTO `marks` VALUES (1,1,4,NULL),(1,2,5,1),(1,4,10,NULL),(1,8,7,NULL),(1,9,8,NULL),(1,12,6,NULL),(1,13,1,NULL),(1,15,9,NULL),(1,16,5,NULL),(1,21,8,NULL),(2,1,3,NULL),(2,2,7,NULL),(2,4,7,NULL),(2,7,9,NULL),(2,11,5,NULL),(2,12,7,NULL),(2,13,8,NULL),(2,14,3,NULL),(2,17,6,NULL),(2,18,7,NULL),(2,19,7,NULL),(2,20,7,NULL),(2,21,8,NULL),(2,22,6,NULL),(3,1,8,NULL),(3,2,7,NULL),(3,4,6,NULL),(3,5,7,NULL),(3,6,5,NULL),(3,8,6,NULL),(3,9,7,NULL),(3,10,4,NULL),(3,11,3,NULL),(3,14,5,NULL),(3,17,6,NULL),(3,20,10,NULL),(4,1,5,NULL),(4,2,4,NULL),(4,5,5,NULL),(4,7,4,NULL),(4,8,5,NULL),(4,9,4,NULL),(4,13,5,NULL),(4,15,7,NULL),(4,17,9,NULL),(4,18,8,NULL),(4,19,7,NULL),(5,2,5,NULL),(5,4,7,NULL),(5,5,5,NULL),(5,6,6,NULL),(5,7,4,NULL),(5,8,3,NULL),(5,9,4,NULL),(5,14,3,NULL),(5,16,5,NULL),(5,18,6,NULL),(5,19,7,NULL),(6,2,10,NULL),(6,4,8,NULL),(6,6,6,NULL),(6,7,5,NULL),(6,8,6,NULL),(6,9,7,NULL),(6,10,8,NULL),(6,11,7,NULL),(6,16,6,NULL),(6,17,5,NULL),(6,18,4,NULL),(7,1,5,NULL),(7,2,3,NULL),(7,9,4,NULL),(7,10,7,NULL),(7,13,5,NULL),(7,14,7,NULL),(7,16,6,NULL),(7,18,7,NULL),(7,19,6,NULL);
 /*!40000 ALTER TABLE `marks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -131,11 +131,12 @@ DROP TABLE IF EXISTS `schedule`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `schedule` (
   `schedule_id` int(11) NOT NULL,
-  `date_time` datetime NOT NULL,
+  `date` date NOT NULL,
   `group_number` varchar(45) NOT NULL,
   `teacher_id` int(11) DEFAULT NULL,
   `room_id` int(11) DEFAULT NULL,
   `lesson_id` int(11) DEFAULT NULL,
+  `time` time DEFAULT NULL,
   PRIMARY KEY (`group_number`,`schedule_id`),
   UNIQUE KEY `shedule_id_UNIQUE` (`schedule_id`),
   KEY `fk_schedule_teacher_teacher_id_idx` (`teacher_id`),
@@ -154,7 +155,7 @@ CREATE TABLE `schedule` (
 
 LOCK TABLES `schedule` WRITE;
 /*!40000 ALTER TABLE `schedule` DISABLE KEYS */;
-INSERT INTO `schedule` VALUES (1,'2017-03-03 11:45:00','350504',3,1,1),(2,'2017-03-05 11:45:00','350504',3,2,1),(3,'2017-03-09 11:45:00','350504',3,2,1),(4,'2017-03-11 11:45:00','350504',3,2,1),(5,'2017-03-14 11:45:00','350504',3,1,1),(6,'2017-03-17 11:45:00','350504',3,2,1),(7,'2017-03-21 11:45:00','350504',3,1,1);
+INSERT INTO `schedule` VALUES (1,'2017-03-03','350504',3,1,1,'11:40:00'),(2,'2017-03-05','350504',3,2,1,'11:40:00'),(3,'2017-03-09','350504',3,2,1,'11:40:00'),(4,'2017-03-11','350504',3,2,1,'11:40:00'),(5,'2017-03-14','350504',3,1,1,'11:40:00'),(6,'2017-03-17','350504',3,2,1,'11:40:00'),(7,'2017-03-21','350504',3,1,1,'11:40:00');
 /*!40000 ALTER TABLE `schedule` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -256,4 +257,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-02 17:34:09
+-- Dump completed on 2017-06-06 18:09:20

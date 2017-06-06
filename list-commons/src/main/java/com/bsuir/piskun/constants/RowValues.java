@@ -25,6 +25,10 @@ public class RowValues {
 
     public static final String DATE_TIME = "date_time";
 
+    public static final String DATE = "date";
+
+    public static final String TIME = "time";
+
     public static final String TEACHER_ID = "teacher_id";
 
     public static final String ROOM_ID = "room_id";

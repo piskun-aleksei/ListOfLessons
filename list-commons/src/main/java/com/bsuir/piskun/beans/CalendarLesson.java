@@ -1,6 +1,7 @@
 package com.bsuir.piskun.beans;
 
 import java.sql.Date;
+import java.sql.Time;
 
 public class CalendarLesson {
 
@@ -10,6 +11,7 @@ public class CalendarLesson {
     private Teacher teacher;
     private Lesson lesson;
     private Date date;
+    private Time time;
 
     public int getScheduleId() {
         return scheduleId;
@@ -59,6 +61,14 @@ public class CalendarLesson {
         this.date = date;
     }
 
+    public Time getTime() {
+        return time;
+    }
+
+    public void setTime(Time time) {
+        this.time = time;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -71,7 +81,8 @@ public class CalendarLesson {
         if (roomNumber != null ? !roomNumber.equals(that.roomNumber) : that.roomNumber != null) return false;
         if (teacher != null ? !teacher.equals(that.teacher) : that.teacher != null) return false;
         if (lesson != null ? !lesson.equals(that.lesson) : that.lesson != null) return false;
-        return date != null ? date.equals(that.date) : that.date == null;
+        if (date != null ? !date.equals(that.date) : that.date != null) return false;
+        return time != null ? time.equals(that.time) : that.time == null;
 
     }
 
@@ -83,6 +94,7 @@ public class CalendarLesson {
         result = 31 * result + (teacher != null ? teacher.hashCode() : 0);
         result = 31 * result + (lesson != null ? lesson.hashCode() : 0);
         result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + (time != null ? time.hashCode() : 0);
         return result;
     }
 
@@ -90,11 +102,12 @@ public class CalendarLesson {
     public String toString() {
         return "CalendarLesson{" +
                 "scheduleId=" + scheduleId +
-                ", groupNumber=" + groupNumber +
+                ", groupNumber='" + groupNumber + '\'' +
                 ", roomNumber='" + roomNumber + '\'' +
                 ", teacher=" + teacher +
                 ", lesson=" + lesson +
                 ", date=" + date +
+                ", time=" + time +
                 '}';
     }
 }

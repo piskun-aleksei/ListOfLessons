@@ -22,25 +22,25 @@ public class ScheduleDaoImpl implements ScheduleDao {
     private Logger logger = LoggerFactory.getLogger(ScheduleDaoImpl.class);
 
     private static final String SELECT_BY_GROUP_NUMBER_FROM_GROUP =
-            "SELECT schedule_id, date_time, group_number, teacher.id as teacher_id, teacher.position, teacher.username, teacher.surname," +
+            "SELECT schedule_id, date, time, group_number, teacher.id as teacher_id, teacher.position, teacher.username, teacher.surname," +
                     "room.room_number, lesson.id as lesson_id, lesson.lesson_name," +
                     "lesson.lesson_type FROM schedule " +
                     "INNER JOIN teacher ON teacher.id = schedule.teacher_id " +
                     "INNER JOIN room ON room.id = schedule.room_id INNER JOIN lesson ON " +
                     "lesson.id = schedule.lesson_id WHERE group_number = ?";
     private static final String SELECT_BY_GROUP_NUMBER_AND_LESSON_ID_FROM_GROUP =
-            "SELECT schedule_id, date_time, group_number, teacher.id as teacher_id, teacher.position, teacher.username, teacher.surname," +
+            "SELECT schedule_id, date, time, group_number, teacher.id as teacher_id, teacher.position, teacher.username, teacher.surname," +
                     "room.room_number, lesson.id as lesson_id, lesson.lesson_name," +
                     "lesson.lesson_type FROM schedule " +
                     "INNER JOIN teacher ON teacher.id = schedule.teacher_id " +
                     "INNER JOIN room ON room.id = schedule.room_id INNER JOIN lesson ON " +
-                    "lesson.id = schedule.lesson_id WHERE group_number = ? AND schedule.lesson_id = ? ORDER BY date_time";
-    private static final String ADD_LESSON_TO_SCHEDULE = "INSERT INTO schedule (date_time, group_number," +
+                    "lesson.id = schedule.lesson_id WHERE group_number = ? AND schedule.lesson_id = ? ORDER BY date";
+    private static final String ADD_LESSON_TO_SCHEDULE = "INSERT INTO schedule (date, time, group_number," +
             " teacher_id, room_id, lesson_id) VALUES (?,?,?,?,?)";
     private static final String REMOVE_LESSON_FROM_SCHEDULE = "DELETE FROM schedule WHERE group_number = ?" +
-            " AND date_time = ?";
+            " AND date = ? AND time = ?";
     private static final String GET_STUDENT_IDS_BY_GROUP = "SELECT student_id, username, surname FROM groups INNER JOIN " +
-            "student ON groups.student_id = student.id WHERE group_number = ? ORDER BY concat(username,surname)";
+            "student ON groups.student_id = student.id WHERE group_number = ? ORDER BY surname";
     private static final String GET_STUDENTS_MARK = "SELECT student_id, mark, absent FROM marks WHERE schedule_id = ?";
     private static final String GET_STUDENT_MARK = "SELECT mark, absent FROM marks WHERE schedule_id = ? AND student_id = ?";
     private static final String SET_STUDENT_MARK = "UPDATE marks SET mark = ? WHERE schedule_id = ? AND student_id = ?";
@@ -285,7 +285,8 @@ public class ScheduleDaoImpl implements ScheduleDao {
 
         CalendarLesson calendarLesson = new CalendarLesson();
         calendarLesson.setScheduleId(resultSet.getInt(RowValues.SCHEDULE_ID));
-        calendarLesson.setDate(resultSet.getDate(RowValues.DATE_TIME));
+        calendarLesson.setTime(resultSet.getTime(RowValues.TIME));
+        calendarLesson.setDate(resultSet.getDate(RowValues.DATE));
         calendarLesson.setGroupNumber(RowValues.GROUP_NUMBER);
         calendarLesson.setLesson(lesson);
         calendarLesson.setTeacher(teacher);

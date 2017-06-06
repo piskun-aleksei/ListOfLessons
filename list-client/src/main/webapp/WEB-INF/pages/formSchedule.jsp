@@ -8,6 +8,7 @@
 <head>
     <title>Forms</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
 </head>
 
 <body>
@@ -18,7 +19,12 @@
 
     <form class="form-horizontal custom-form" action="addSchedule">
         <div class="form-group">
-            <input type="text" class="form-control" name="scheduleDate" placeholder="Дата">
+            <div class="input-group date" id="datePicker" data-provide="datepicker">
+                <input name="scheduleDate" type="text" class="form-control">
+                <div class="input-group-addon">
+                    <span class="glyphicon glyphicon-th"></span>
+                </div>
+            </div>
         </div>
         <div class="form-group">
             <input type="text" class="form-control" name="scheduleGroup" placeholder="Номер группы">
