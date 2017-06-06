@@ -27,7 +27,7 @@
             </div>
 
              -->
-            <input type="text" class="form-control" name="scheduleDate" placeholder="Дата">
+            <input type="date" class="form-control" name="scheduleDate" placeholder="Дата">
         </div>
         <div class="form-group">
             <input type="text" class="form-control" name="scheduleGroup" placeholder="Номер группы">
